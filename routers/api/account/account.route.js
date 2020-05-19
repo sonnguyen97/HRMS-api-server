@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Account = require("../../../models/Account");
 const account_dao = require("../../../daos/account.dao");
-const auth = require("../../../middlleware/auth.middleware");
+const auth = require("../../../middleware/auth.middleware");
 
 router.get("/", async (req, res) => {
     try {
