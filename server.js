@@ -6,7 +6,9 @@ const PORT = process.env.PORT || 3000;
 const db = require("./config/db-connection");
 var cors = require("cors");
 
-app.listen(PORT, () => {
+var http = require('http').Server(app);
+
+http.listen(PORT, () => {
   console.log("Server is running on port " + PORT);
 });
 app.use(
@@ -35,7 +37,7 @@ db.authenticate()
   .catch(err => console.log("error: " + err));
 
 // Account routes
-app.get("/", (req, res) => {
-  res.status(200).send("WHATABYTE: Food For Devs");
+app.get("/", function(req, res){
+  res.sendFile(__dirname +'/index.html');
 });
 app.use("/api", require("./routers"));
