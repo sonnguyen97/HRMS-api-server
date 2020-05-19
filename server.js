@@ -35,4 +35,7 @@ db.authenticate()
   .catch(err => console.log("error: " + err));
 
 // Account routes
-app.use("/", require("./routers"));
+app.get("/", (req, res) => {
+  res.status(200).send("WHATABYTE: Food For Devs");
+});
+app.use("/api", require("./routers"));
