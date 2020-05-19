@@ -9,13 +9,19 @@ const Account = db.define(
       primaryKey: true
     },
     email: {
-      type: Sequelize.STRING,
-      allowNull: false
+      type: Sequelize.STRING
     },
     password: {
-      type: Sequelize.STRING,
-      allowNull: false
+      type: Sequelize.STRING
+    },
+    created_date: {
+      type: Sequelize.DATE
+      
+    },
+    modified_date: {
+      type: Sequelize.DATE
     }
+
   },
   {
     timestamps: false,

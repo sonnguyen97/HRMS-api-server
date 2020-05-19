@@ -1,23 +1,19 @@
-const Account = require("../models/Account");
 const uuidv1 = require("uuid/v1");
 var CryptoJS = require("crypto-js");
-
-const db = require("../config/db-connection");
+const Account = require("../models/Account");
 
 module.exports = {
   createAccount: async (acc) => {
-    if (!acc.id) {
-      acc.id = uuidv1();
-    }
-
     var passwordEncrypt = CryptoJS.SHA256(acc.password);
-    acc.password = passwordEncrypt.toString();
-
-    acc.status_id = ACTIVATED.id;
-    acc.role_id = STORE_OWNER.id;
-
     try {
-      return Account.create(acc);
+     return await Account.create({
+        id: uuidv1(),
+        password: passwordEncrypt.toString(),
+        email: acc.email,
+        created_date: Date.now()
+      }).then(async res =>{
+        return res;
+      })
     } catch (err) {
       console.log(err);
     }

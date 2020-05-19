@@ -19,7 +19,7 @@ router.get("/", auth, async (req, res) => {
       where: {
         email: req.account.email
       },
-      attributes: ["id", "email", "first_name"]
+      attributes: ["id", "email"]
     });
     res.json(account);
   } catch (err) {
@@ -49,13 +49,13 @@ router.post(
       });
     }
 
-    const { storeDomain, password } = req.body;
+    const { email, password } = req.body;
     var passwordEncrypt = CryptoJS.SHA256(password);
     try {
       console.log(req.body);
       let account = await Account.findOne({
         where: {
-          store_domain: storeDomain,
+          email: email,
           password: passwordEncrypt.toString()
         }
       });

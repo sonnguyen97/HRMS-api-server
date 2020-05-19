@@ -1,16 +1,28 @@
 const express = require("express");
 const router = express.Router();
 const Account = require("../../../models/Account");
-// const account_dao = require("../../..//");
+const account_dao = require("../../../daos/account.dao");
 const auth = require("../../../middlleware/auth.middleware");
 
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
     try {
-        const account = await Account.findOne();
-        res.status(200).json(account);
+        const account = await Account.findAll();
+        res.json(account);
     } catch (err) {
         console.log(err.message);
-        res.status(500).send("Server error");
+        res.send("Server error");
+    }
+});
+
+router.post("/", async (req, res) => {
+    var newAccount = req.body;
+    console.log(newAccount);
+    try {
+       var result = await account_dao.createAccount(newAccount);
+       res.json(result);
+    } catch (err) {
+        console.log(err.message);
+        res.send("Server error");
     }
 });
 
