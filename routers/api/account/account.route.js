@@ -39,4 +39,17 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
+router.delete("/:id", async (req, res) =>{
+    const id = req.params.id;
+    try {
+        const account = await Account.destroy({
+            where: {id: id}
+        })
+        res.status(200).send("Delete Account by id:" + id + " susscessfully.");
+    } catch (err) {
+        console.log(err.message);
+        res.send("Server error");
+    }
+});
+
 module.exports = router;
