@@ -6,12 +6,12 @@ module.exports = {
   createAccount: async (acc) => {
     var passwordEncrypt = CryptoJS.SHA256(acc.password);
     try {
-     return await Account.create({
+      return await Account.create({
         id: uuidv1(),
         password: passwordEncrypt.toString(),
         email: acc.email,
         created_date: Date.now()
-      }).then(async res =>{
+      }).then(async res => {
         return res;
       })
     } catch (err) {
