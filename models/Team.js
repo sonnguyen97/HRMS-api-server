@@ -21,15 +21,19 @@ const Team = db.define(
         description: {
             type: Sequelize.STRING
         }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true
     }
 );
 
-Team.belongsTo(TeamOperatorStatus,{
+Team.belongsTo(TeamOperatorStatus, {
     foreignKey: "status_id",
     sourceKey: "id"
 });
 
-TeamOperatorStatus.hasMany(Team,{
+TeamOperatorStatus.hasMany(Team, {
     foreignKey: "status_id",
     sourceKey: "id"
 });

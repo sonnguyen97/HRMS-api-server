@@ -11,7 +11,11 @@ const DepartmentOperatorStatus = db.define(
         name: {
             type: Sequelize.STRING
         }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true
     }
-)
+);
 
 module.exports = DepartmentOperatorStatus;

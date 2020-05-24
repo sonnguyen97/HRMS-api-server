@@ -11,6 +11,10 @@ const AccountOperatorStatus = db.define(
         name: {
             type: Sequelize.STRING
         }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true
     }
 );
 
