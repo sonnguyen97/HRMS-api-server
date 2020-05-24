@@ -64,7 +64,9 @@ module.exports = {
 module.exports = {
     findByPk: async (id) => {
         try {
-            return await Department.findByPk(id)
+            return await Department.findAll({
+                where: { id: id, status_id: 1 }
+            })
                 .then(async res => {
                     return res;
                 })
