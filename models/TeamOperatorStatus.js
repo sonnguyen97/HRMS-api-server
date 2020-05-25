@@ -5,12 +5,16 @@ const TeamOperatorStatus = db.define(
     "TeamOperatorStatus",
     {
         id: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             primaryKey: true
         },
         name: {
             type: Sequelize.STRING
         }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true
     }
 );
 

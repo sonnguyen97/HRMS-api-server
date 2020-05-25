@@ -5,13 +5,17 @@ const DepartmentOperatorStatus = db.define(
     "DepartmentOperatorStatus",
     {
         id: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             primaryKey: true
         },
         name: {
             type: Sequelize.STRING
         }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true
     }
-)
+);
 
 module.exports = DepartmentOperatorStatus;

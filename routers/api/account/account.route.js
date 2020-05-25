@@ -18,19 +18,31 @@ router.post("/", async (req, res) => {
     var newAccount = req.body;
     console.log(newAccount);
     try {
-       var result = await account_dao.createAccount(newAccount);
-       res.json(result);
+        var result = await account_dao.createAccount(newAccount);
+        res.json(result);
     } catch (err) {
         console.log(err.message);
         res.send("Server error");
     }
 });
 
-router.delete("/:id", async (req, res) =>{
+router.put("/:id", async (req, res) => {
+    const account = req.body;
+    const id = req.params.id;
+    try {
+        await account_dao.updateAccount(account, id);
+        res.status(200).json("update susscessfully");
+    } catch (err) {
+        console.log(err.message);
+        res.send("Server error");
+    }
+})
+
+router.delete("/:id", async (req, res) => {
     const id = req.params.id;
     try {
         const account = await Account.destroy({
-            where: {id: id}
+            where: { id: id }
         })
         res.status(200).send("Delete Account by id:" + id + " susscessfully.");
     } catch (err) {

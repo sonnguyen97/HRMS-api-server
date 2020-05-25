@@ -6,7 +6,7 @@ const Team = db.define(
     "Team",
     {
         id: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             primaryKey: true
         },
         name: {
@@ -21,15 +21,19 @@ const Team = db.define(
         description: {
             type: Sequelize.STRING
         }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true
     }
 );
 
-Team.belongsTo(TeamOperatorStatus,{
+Team.belongsTo(TeamOperatorStatus, {
     foreignKey: "status_id",
     sourceKey: "id"
 });
 
-TeamOperatorStatus.hasMany(Team,{
+TeamOperatorStatus.hasMany(Team, {
     foreignKey: "status_id",
     sourceKey: "id"
 });

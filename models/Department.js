@@ -6,7 +6,7 @@ const Department = db.define(
     "Department",
     {
         id: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             primaryKey: true
         },
         name: {
@@ -21,15 +21,23 @@ const Department = db.define(
         modified_date: {
             type: Sequelize.DATE
         },
+        status_id: {
+            type: Sequelize.INTEGER
+        }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true
     }
 );
 
-Department.belongsTo(DepartmentOperatorStatus,{
+
+Department.belongsTo(DepartmentOperatorStatus, {
     foreignKey: "status_id",
     sourceKey: "id"
 });
 
-DepartmentOperatorStatus.hasMany(Department,{
+DepartmentOperatorStatus.hasMany(Department, {
     foreignKey: "status_id",
     sourceKey: "id"
 });

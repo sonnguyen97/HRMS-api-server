@@ -7,30 +7,34 @@ const Account_Team = db.define(
     "Account_Team",
     {
         account_id: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             primaryKey: true
         },
         team_id: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             primaryKey: true
         }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true
     }
 );
 
-Account_Team.belongsTo(Account,{
+Account_Team.belongsTo(Account, {
     foreignKey: "account_id",
     sourceKey: "id"
 });
-Account.hasMany(Account_Team,{
+Account.hasMany(Account_Team, {
     foreignKey: "account_id",
     sourceKey: "id"
 }),
 
-Account_Team.belongsTo(Team,{
-    foreignKey: "team_id",
-    sourceKey: "id"
-});
-Team.hasMany(Account_Team,{
+    Account_Team.belongsTo(Team, {
+        foreignKey: "team_id",
+        sourceKey: "id"
+    });
+Team.hasMany(Account_Team, {
     foreignKey: "team_id",
     sourceKey: "id"
 });
