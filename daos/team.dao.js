@@ -2,7 +2,6 @@ const Team = require("../models/Team");
 
 module.exports = {
     createTeam: async (team) => {
-
         try {
             return await Team.create({
                 name: team.name,
@@ -15,10 +14,6 @@ module.exports = {
             console.log(err);
         }
     },
-
-};
-
-module.exports = {
     updateTeam: async (team, team_id) => {
         try {
             return await Team.update(team, {
@@ -30,9 +25,6 @@ module.exports = {
             console.log(err);
         }
     },
-};
-
-module.exports = {
     deleteTeam: async (team, id) => {
         try {
             return await Team.update(team, {
@@ -44,9 +36,6 @@ module.exports = {
             console.log(err);
         }
     },
-};
-
-module.exports = {
     findAllTeam: async () => {
         try {
             return await Team.findAll({
@@ -58,9 +47,6 @@ module.exports = {
             console.log(err);
         }
     },
-};
-
-module.exports = {
     findByPk: async (id) => {
         try {
             return await Team.findAll({
@@ -74,3 +60,4 @@ module.exports = {
         }
     },
 };
+

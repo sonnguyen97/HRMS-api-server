@@ -2,7 +2,6 @@ const Department = require("../models/Department");
 
 module.exports = {
     createDepartment: async (department) => {
-
         try {
             return await Department.create({
                 name: department.name,
@@ -16,10 +15,6 @@ module.exports = {
             console.log(err);
         }
     },
-
-};
-
-module.exports = {
     updateDepartment: async (department, department_id) => {
         try {
             return await Department.update(department, {
@@ -31,9 +26,6 @@ module.exports = {
             console.log(err);
         }
     },
-};
-
-module.exports = {
     deleteDepartment: async (department, id) => {
         try {
             return await Department.update(department, {
@@ -45,9 +37,6 @@ module.exports = {
             console.log(err);
         }
     },
-};
-
-module.exports = {
     findAllDepartment: async () => {
         try {
             return await Department.findAll({
@@ -59,9 +48,6 @@ module.exports = {
             console.log(err);
         }
     },
-};
-
-module.exports = {
     findByPk: async (id) => {
         try {
             return await Department.findAll({
