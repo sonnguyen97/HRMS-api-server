@@ -6,7 +6,7 @@ const Department = db.define(
     "Department",
     {
         id: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
             primaryKey: true
         },
         name: {
@@ -21,9 +21,6 @@ const Department = db.define(
         modified_date: {
             type: Sequelize.DATE
         },
-        status_id: {
-            type: Sequelize.INTEGER
-        }
     },
     {
         timestamps: false,

@@ -1,13 +1,12 @@
-const Department = require("../models/Department");
+const Team = require("../models/Team");
 
 module.exports = {
-    createDepartment: async (department) => {
+    createTeam: async (team) => {
         try {
-            return await Department.create({
-                name: department.name,
-                description: department.description,
+            return await Team.create({
+                name: team.name,
                 created_date: Date.now(),
-                status_id: department.status_id
+                status_id: team.status_id
             }).then(async res => {
                 return res;
             })
@@ -15,10 +14,10 @@ module.exports = {
             console.log(err);
         }
     },
-    updateDepartment: async (department, department_id) => {
+    updateTeam: async (team, team_id) => {
         try {
-            return await Department.update(department, {
-                where: { id: department_id }
+            return await Team.update(team, {
+                where: { id: team_id }
             }).then(async res => {
                 return res;
             })
@@ -26,9 +25,9 @@ module.exports = {
             console.log(err);
         }
     },
-    deleteDepartment: async (department, id) => {
+    deleteTeam: async (team, id) => {
         try {
-            return await Department.update(department, {
+            return await Team.update(team, {
                 where: { id: id }
             }).then(async res => {
                 return res;
@@ -37,9 +36,9 @@ module.exports = {
             console.log(err);
         }
     },
-    findAllDepartment: async () => {
+    findAllTeam: async () => {
         try {
-            return await Department.findAll({
+            return await Team.findAll({
                 where: { status_id: 1 }
             }).then(async res => {
                 return res;
@@ -50,7 +49,7 @@ module.exports = {
     },
     findByPk: async (id) => {
         try {
-            return await Department.findAll({
+            return await Team.findAll({
                 where: { id: id, status_id: 1 }
             })
                 .then(async res => {
@@ -61,3 +60,4 @@ module.exports = {
         }
     },
 };
+
