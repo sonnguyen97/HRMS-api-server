@@ -6,7 +6,7 @@ const Team = db.define(
     "Team",
     {
         id: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             primaryKey: true
         },
         name: {

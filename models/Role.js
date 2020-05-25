@@ -5,7 +5,7 @@ const Role = db.define(
     "Role",
     {
         id: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             primaryKey: true
         },
         name: {

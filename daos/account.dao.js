@@ -26,8 +26,8 @@ module.exports = {
       console.log(err);
     }
   },
-   // update account
-   updateAccount: async (acc, id) => {
+  // update account
+  updateAccount: async (acc, id) => {
     var passwordEncrypt = CryptoJS.SHA256(acc.password);
     console.log(passwordEncrypt);
     try {
@@ -47,4 +47,3 @@ module.exports = {
   }
 };
 
- 

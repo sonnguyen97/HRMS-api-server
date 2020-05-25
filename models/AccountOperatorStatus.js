@@ -5,7 +5,7 @@ const AccountOperatorStatus = db.define(
     "AccountOperatorStatus",
     {
         id: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             primaryKey: true
         },
         name: {

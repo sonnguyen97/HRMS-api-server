@@ -8,7 +8,7 @@ const Account = db.define(
   "Account",
   {
     id: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       primaryKey: true
     },
     email: {
@@ -19,7 +19,7 @@ const Account = db.define(
     },
     created_date: {
       type: Sequelize.DATE
-      
+
     },
     modified_date: {
       type: Sequelize.DATE
@@ -29,32 +29,32 @@ const Account = db.define(
     timestamps: false,
     freezeTableName: true
   }
- 
+
 );
 
-Account.belongsTo(Role,{
+Account.belongsTo(Role, {
   foreignKey: "role_id",
   sourceKey: "id"
 });
-Role.hasMany(Account,{
+Role.hasMany(Account, {
   foreignKey: "role_id",
   sourceKey: "id"
 });
 
-Account.belongsTo(Department,{
-  foreignKey:"department_id",
+Account.belongsTo(Department, {
+  foreignKey: "department_id",
   sourceKey: "id"
 });
-Department.hasMany(Account,{
+Department.hasMany(Account, {
   foreignKey: "department_id",
   sourceKey: "id"
 });
 
-Account.belongsTo(AccountOperatorStatus,{
+Account.belongsTo(AccountOperatorStatus, {
   foreignKey: "status_id",
   sourceKey: "id"
 });
-AccountOperatorStatus.hasMany(Account,{
+AccountOperatorStatus.hasMany(Account, {
   foreignKey: "status_id",
   sourceKey: "id"
 })
