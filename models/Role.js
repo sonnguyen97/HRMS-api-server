@@ -11,7 +11,11 @@ const Role = db.define(
         name: {
             type: Sequelize.STRING
         }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true
     }
-)
+);
 
 module.exports = Role;
