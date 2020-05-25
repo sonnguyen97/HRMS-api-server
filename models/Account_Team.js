@@ -7,11 +7,11 @@ const Account_Team = db.define(
     "Account_Team",
     {
         account_id: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             primaryKey: true
         },
         team_id: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             primaryKey: true
         }
     },
