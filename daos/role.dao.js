@@ -2,7 +2,6 @@ const Role = require("../models/Role");
 
 module.exports = {
     createRole: async (role) => {
-
         try {
             return await Role.create({
                 name: role.name
@@ -13,10 +12,6 @@ module.exports = {
             console.log(err);
         }
     },
-
-};
-
-module.exports = {
     updateRole: async (role, role_id) => {
         try {
             return await Role.update(role, {
@@ -28,9 +23,6 @@ module.exports = {
             console.log(err);
         }
     },
-};
-
-module.exports = {
     deleteRole: async (role, id) => {
         try {
             return await Role.update(role, {
@@ -42,9 +34,6 @@ module.exports = {
             console.log(err);
         }
     },
-};
-
-module.exports = {
     findAllRole: async () => {
         try {
             return await Role.findAll().then(async res => {
@@ -54,9 +43,6 @@ module.exports = {
             console.log(err);
         }
     },
-};
-
-module.exports = {
     findByPk: async (id) => {
         try {
             return await Role.findAll({
@@ -70,3 +56,4 @@ module.exports = {
         }
     },
 };
+
