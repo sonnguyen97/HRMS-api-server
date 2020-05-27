@@ -13,8 +13,8 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:id", async (req, res) => {
-    const id = req.params.id;
+router.get("/byID", async (req, res) => {
+    const id = req.body.id;
     try {
         const role = await role_dao.findByPk(id);
         res.json(role);
@@ -36,9 +36,9 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/", async (req, res) => {
     var role = req.body;
-    var role_id = req.params.id;
+    var role_id = req.body.id;
     console.log(role);
     try {
         var result = await role_dao.updateRole(role, role_id);
@@ -49,7 +49,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-router.put("/delete/:id", async (req, res) => {
+router.put("/delete", async (req, res) => {
     const id = req.params.id;
     const role = req.body;
     try {

@@ -13,8 +13,8 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:id", async (req, res) => {
-    const id = req.params.id;
+router.get("/byID", async (req, res) => {
+    const id = req.body.id;
     try {
         const team = await team_dao.findByPk(id);
         res.json(team);
@@ -36,9 +36,9 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/", async (req, res) => {
     var team = req.body;
-    var team_id = req.params.id;
+    var team_id = req.body.id;
     console.log(team);
     try {
         var result = await team_dao.updateTeam(team, team_id);
@@ -49,8 +49,8 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-router.put("/delete/:id", async (req, res) => {
-    const id = req.params.id;
+router.put("/delete", async (req, res) => {
+    const id = req.body.id;
     const team = req.body;
     try {
         var result = await team_dao.deleteTeam(team, id);

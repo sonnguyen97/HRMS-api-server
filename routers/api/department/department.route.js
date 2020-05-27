@@ -13,8 +13,8 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:id", async (req, res) => {
-    const id = req.params.id;
+router.get("/byID", async (req, res) => {
+    const id = req.body.id;
     try {
         const department = await department_dao.findByPk(id);
         res.json(department);
@@ -36,9 +36,9 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/", async (req, res) => {
     var department = req.body;
-    var department_id = req.params.id;
+    var department_id = req.body.id;
     console.log(department);
     try {
         var result = await department_dao.updateDepartment(department, department_id);
@@ -49,8 +49,8 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-router.put("/delete/:id", async (req, res) => {
-    const id = req.params.id;
+router.put("/delete", async (req, res) => {
+    const id = req.body.id;
     const department = req.body;
     try {
         var result = await department_dao.deleteDepartment(department, id);
