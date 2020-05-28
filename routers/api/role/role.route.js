@@ -13,8 +13,8 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:id", async (req, res) => {
-    const id = req.params.id;
+router.get("/byID", async (req, res) => {
+    const id = req.body.id;
     try {
         const role = await role_dao.findByPk(id);
         res.json(role);
@@ -29,32 +29,68 @@ router.post("/", async (req, res) => {
     console.log(newRole);
     try {
         var result = await role_dao.createRole(newRole);
-        res.json(result);
+        if (result !== undefined) {
+            const response = {
+                status: "success",
+                message: "Create Role success!"
+            }
+            res.json(response);
+        } else if (result === undefined) {
+            const response = {
+                status: "fail",
+                message: "Create Role fail!"
+            }
+            res.json(response);
+        }
     } catch (err) {
         console.log(err.message);
         res.send("Server error");
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/", async (req, res) => {
     var role = req.body;
-    var role_id = req.params.id;
+    var role_id = req.body.id;
     console.log(role);
     try {
         var result = await role_dao.updateRole(role, role_id);
-        res.json(result);
+        if (result > 0) {
+            const response = {
+                status: "success",
+                message: "Update Role success!"
+            }
+            res.json(response);
+        } else if (result === undefined) {
+            const response = {
+                status: "fail",
+                message: "Update Role fail!"
+            }
+            res.json(response);
+        }
     } catch (err) {
         console.log(err.message);
         res.send("Server error");
     }
 });
 
-router.put("/delete/:id", async (req, res) => {
+router.put("/delete", async (req, res) => {
     const id = req.params.id;
     const role = req.body;
     try {
         var result = await role_dao.deleteRole(role, id);
-        res.json(result);
+        if (result > 0) {
+            const response = {
+                status: "success",
+                message: "Delete Role success!"
+            }
+            res.json(response);
+        } else if (result === undefined) {
+            const response = {
+                status: "fail",
+                message: "Delete Role fail!"
+            }
+            res.json(response);
+        }
     } catch (err) {
         console.log(err.message);
         res.send("Server error");
