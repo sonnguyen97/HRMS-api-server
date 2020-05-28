@@ -29,7 +29,19 @@ router.post("/", async (req, res) => {
     console.log(newDepartment);
     try {
         var result = await department_dao.createDepartment(newDepartment);
-        res.json(result);
+        if (result !== undefined) {
+            const response = {
+                status: "success",
+                message: "Create Department success!"
+            }
+            res.json(response);
+        } else if (result === undefined) {
+            const response = {
+                status: "fail",
+                message: "Create Department fail!"
+            }
+            res.json(response);
+        }
     } catch (err) {
         console.log(err.message);
         res.send("Server error");
@@ -42,7 +54,19 @@ router.put("/", async (req, res) => {
     console.log(department);
     try {
         var result = await department_dao.updateDepartment(department, department_id);
-        res.json(result);
+        if (result > 0) {
+            const response = {
+                status: "success",
+                message: "Update Department success!"
+            }
+            res.json(response);
+        } else if (result === undefined) {
+            const response = {
+                status: "fail",
+                message: "Update Department fail!"
+            }
+            res.json(response);
+        }
     } catch (err) {
         console.log(err.message);
         res.send("Server error");
@@ -54,7 +78,19 @@ router.put("/delete", async (req, res) => {
     const department = req.body;
     try {
         var result = await department_dao.deleteDepartment(department, id);
-        res.json(result);
+        if (result > 0) {
+            const response = {
+                status: "success",
+                message: "Delete Department success!"
+            }
+            res.json(response);
+        } else if (result === undefined) {
+            const response = {
+                status: "fail",
+                message: "Delete Department fail!"
+            }
+            res.json(response);
+        }
     } catch (err) {
         console.log(err.message);
         res.send("Server error");

@@ -29,7 +29,19 @@ router.post("/", async (req, res) => {
     console.log(newTeam);
     try {
         var result = await team_dao.createTeam(newTeam);
-        res.json(result);
+        if (result !== undefined) {
+            const response = {
+                status: "success",
+                message: "Create Team success!"
+            }
+            res.json(response);
+        } else if (result === undefined) {
+            const response = {
+                status: "fail",
+                message: "Create Team fail!"
+            }
+            res.json(response);
+        }
     } catch (err) {
         console.log(err.message);
         res.send("Server error");
@@ -42,7 +54,19 @@ router.put("/", async (req, res) => {
     console.log(team);
     try {
         var result = await team_dao.updateTeam(team, team_id);
-        res.json(result);
+        if (result > 0) {
+            const response = {
+                status: "success",
+                message: "Update Team success!"
+            }
+            res.json(response);
+        } else if (result === undefined) {
+            const response = {
+                status: "fail",
+                message: "Update Team fail!"
+            }
+            res.json(response);
+        }
     } catch (err) {
         console.log(err.message);
         res.send("Server error");
@@ -54,7 +78,19 @@ router.put("/delete", async (req, res) => {
     const team = req.body;
     try {
         var result = await team_dao.deleteTeam(team, id);
-        res.json(result);
+        if (result !== undefined) {
+            const response = {
+                status: "success",
+                message: "Delete Team success!"
+            }
+            res.json(response);
+        } else if (result === undefined) {
+            const response = {
+                status: "fail",
+                message: "Delete Team fail!"
+            }
+            res.json(response);
+        }
     } catch (err) {
         console.log(err.message);
         res.send("Server error");
