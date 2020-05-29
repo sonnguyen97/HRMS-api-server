@@ -56,33 +56,32 @@ module.exports = {
       console.log(err);
     }
   },
+  getAccountById: async (id) => {
+    try {
+      return await Account.findOne({
+        where: { id: id, status_id: contants.ACCOUNT_STATUS_ACTIVE}
+      }).then(async res => {
+        return res;
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  },
   deactiveAccount: async (status_id) => {
     try {
-      if (status_id == contants.ACCOUNT_STATUS_ACTIVE) {
-        return await Account.update(
-          {
-            status_id: contants.ACCOUNT_STATUS_DEACTIVE
-          },
-          {
-            where: { id: status_id }
-          }
-        ).then(async res => {
-          return res;
-        })
-      } else if (status_id == contants.ACCOUNT_STATUS_DEACTIVE) {
-        return await Account.update(
-          {
-            status_id: contants.ACCOUNT_STATUS_ACTIVE
-          },
-          {
-            where: { id: status_id }
-          }
-        ).then(async res => {
-          return res;
-        })
-      }
 
-    } catch (err) {
+      return await Account.update(
+        {
+          status_id: contants.ACCOUNT_STATUS_DEACTIVE
+        },
+        {
+          where: { id: status_id }
+        }
+      ).then(async res => {
+        return res;
+      })
+    }
+    catch (err) {
       console.log(err);
     }
   }
