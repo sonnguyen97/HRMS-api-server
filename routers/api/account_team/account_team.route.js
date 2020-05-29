@@ -13,21 +13,27 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.post("/:id", async (req, res) => {
-    var listIdAcc = req.body;
+router.get("/:id", async (req, res) => {
     const teamId = req.params.id;
-    // console.log(listIdAcc);
-    // console.log(teamId);
     try {
-        // listIdAcc.forEach(element => {
-        //     AccountTeam.create({
-        //         account_id: element.id,
-        //         team_id: teamId
-        //     })
-        //     console.log(element + teamId);
-        // })
-        var result =  await account_team_dao.createAccountsTeam(listIdAcc,teamId);
-        res.json("Added");
+        // var listAccount = account_team_dao.getAllAccountByTeamId(teamId);
+        var listAccount = AccountTeam.findAll({
+            where: {team_id: teamId}
+        })
+        console.log(listAccount);
+        res.json(listAccount);
+    } catch (err) {
+        console.log(err);
+        res.send("Server error");
+    }
+});
+
+router.post("/", async (req, res) => {
+    var listIdAcc = req.body.accId;
+    var team = req.body.teamId;
+    try {
+        var result = await account_team_dao.createAccountsTeam(listIdAcc, team);
+        res.json("Success");
     } catch (err) {
         console.log(err);
         res.send("server error");
