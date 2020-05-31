@@ -18,4 +18,4 @@ const EmployeeOperatorStatus = db.define(
     }
 );
 
-module.exports = AccountOperatorStatus;
+module.exports = EmployeeOperatorStatus;

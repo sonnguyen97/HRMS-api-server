@@ -61,4 +61,4 @@ Role.hasMany(Employee, {
     sourceKey: "id"
 });
 
-module.exports = Account;
+module.exports = Employee;

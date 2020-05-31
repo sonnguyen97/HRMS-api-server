@@ -25,7 +25,7 @@ Team_Employee.belongsTo(Employee, {
     foreignKey: "employee_id",
     sourceKey: "id"
 });
-Account.hasMany(Account_Team, {
+Employee.hasMany(Team_Employee, {
     foreignKey: "employee_id",
     sourceKey: "id"
 });
