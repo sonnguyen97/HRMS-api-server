@@ -40,4 +40,4 @@ db.authenticate()
 app.get("/", function(req, res){
   res.sendFile(__dirname +'/index.html');
 });
-app.use("/api", require("./routers"));
+// app.use("/api", require("./routers"));

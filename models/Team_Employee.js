@@ -1,12 +1,12 @@
 const Sequelize = require("sequelize");
 const db = require("../config/db-connection");
-const Account = require("./Account");
+const Employee = require("./Employee");
 const Team = require("./Team");
 
-const Account_Team = db.define(
-    "Account_Team",
+const Team_Employee = db.define(
+    "team_employee",
     {
-        account_id: {
+        employee_id: {
             type: Sequelize.INTEGER,
             primaryKey: true
         },
@@ -21,22 +21,22 @@ const Account_Team = db.define(
     }
 );
 
-Account_Team.belongsTo(Account, {
-    foreignKey: "account_id",
+Team_Employee.belongsTo(Employee, {
+    foreignKey: "employee_id",
     sourceKey: "id"
 });
 Account.hasMany(Account_Team, {
-    foreignKey: "account_id",
+    foreignKey: "employee_id",
     sourceKey: "id"
-}),
+});
 
-    Account_Team.belongsTo(Team, {
-        foreignKey: "team_id",
-        sourceKey: "id"
-    });
-Team.hasMany(Account_Team, {
+Team_Employee.belongsTo(Team, {
+    foreignKey: "team_id",
+    sourceKey: "id"
+});
+Team.hasMany(Team_Employee, {
     foreignKey: "team_id",
     sourceKey: "id"
 });
 
-module.exports = Account_Team;
+module.exports = Team_Employee;

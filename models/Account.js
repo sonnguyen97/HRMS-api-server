@@ -5,10 +5,10 @@ const Department = require("./Department");
 const AccountOperatorStatus = require("./AccountOperatorStatus");
 
 const Account = db.define(
-  "Account",
+  "account",
   {
     id: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       primaryKey: true
     },
     email: {
@@ -19,7 +19,7 @@ const Account = db.define(
     },
     created_date: {
       type: Sequelize.DATE
-
+      
     },
     modified_date: {
       type: Sequelize.DATE
@@ -29,32 +29,32 @@ const Account = db.define(
     timestamps: false,
     freezeTableName: true
   }
-
+ 
 );
-
-Account.belongsTo(Role, {
+//role
+Account.belongsTo(Role,{
   foreignKey: "role_id",
   sourceKey: "id"
 });
-Role.hasMany(Account, {
+Role.hasMany(Account,{
   foreignKey: "role_id",
   sourceKey: "id"
 });
-
-Account.belongsTo(Department, {
+//department
+Account.belongsTo(Department,{
+  foreignKey:"department_id",
+  sourceKey: "id"
+});
+Department.hasMany(Account,{
   foreignKey: "department_id",
   sourceKey: "id"
 });
-Department.hasMany(Account, {
-  foreignKey: "department_id",
-  sourceKey: "id"
-});
-
-Account.belongsTo(AccountOperatorStatus, {
+//status
+Account.belongsTo(AccountOperatorStatus,{
   foreignKey: "status_id",
   sourceKey: "id"
 });
-AccountOperatorStatus.hasMany(Account, {
+AccountOperatorStatus.hasMany(Account,{
   foreignKey: "status_id",
   sourceKey: "id"
 })
