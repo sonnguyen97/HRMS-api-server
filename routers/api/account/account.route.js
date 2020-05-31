@@ -24,7 +24,7 @@ router.get("/:id", async (req, res) => {
         console.log(err.message);
         res.send("Server error");
     }
-})
+});
 
 router.post("/", async (req, res) => {
     var newAccount = req.body;

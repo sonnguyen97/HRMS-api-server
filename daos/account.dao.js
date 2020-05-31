@@ -15,7 +15,6 @@ module.exports = {
           password: passwordEncrypt.toString(),
           email: acc.email,
           created_date: Date.now(),
-          role_id: acc.role_id,
           status_id: contants.ACCOUNT_STATUS_ACTIVE
         }).then(async res => {
           return res;
@@ -59,7 +58,7 @@ module.exports = {
   getAccountById: async (id) => {
     try {
       return await Account.findOne({
-        where: { id: id, status_id: contants.ACCOUNT_STATUS_ACTIVE}
+        where: { id: id, status_id: contants.ACCOUNT_STATUS_ACTIVE }
       }).then(async res => {
         return res;
       })
