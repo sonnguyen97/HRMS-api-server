@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../config/db-connection");
 
 const Role = db.define(
-    "Role",
+    "role",
     {
         id: {
             type: Sequelize.INTEGER,

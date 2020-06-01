@@ -2,6 +2,7 @@ var CryptoJS = require("crypto-js");
 const Account = require("../models/Account");
 const Randomstring = require("randomstring");
 const contants = require("../contants/contants");
+const AccountStatus = require("../models/AccountOperatorStatus");
 
 //create account
 module.exports = {
@@ -15,7 +16,6 @@ module.exports = {
           password: passwordEncrypt.toString(),
           email: acc.email,
           created_date: Date.now(),
-          role_id: acc.role_id,
           status_id: contants.ACCOUNT_STATUS_ACTIVE
         }).then(async res => {
           return res;
@@ -48,8 +48,25 @@ module.exports = {
   getAccounts: async () => {
     try {
       return await Account.findAll(
-        { where: { status_id: contants.ACCOUNT_STATUS_ACTIVE } }
+        {
+          include: [{
+            model: AccountStatus,
+            attributes: ['name']
+            // where: id
+          }],
+          where: { status_id: contants.ACCOUNT_STATUS_ACTIVE } }
       ).then(async res => {
+        return res;
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getAccountById: async (id) => {
+    try {
+      return await Account.findOne({
+        where: { id: id, status_id: contants.ACCOUNT_STATUS_ACTIVE }
+      }).then(async res => {
         return res;
       })
     } catch (err) {
@@ -58,31 +75,19 @@ module.exports = {
   },
   deactiveAccount: async (status_id) => {
     try {
-      if (status_id == contants.ACCOUNT_STATUS_ACTIVE) {
-        return await Account.update(
-          {
-            status_id: contants.ACCOUNT_STATUS_DEACTIVE
-          },
-          {
-            where: { id: status_id }
-          }
-        ).then(async res => {
-          return res;
-        })
-      } else if (status_id == contants.ACCOUNT_STATUS_DEACTIVE) {
-        return await Account.update(
-          {
-            status_id: contants.ACCOUNT_STATUS_ACTIVE
-          },
-          {
-            where: { id: status_id }
-          }
-        ).then(async res => {
-          return res;
-        })
-      }
 
-    } catch (err) {
+      return await Account.update(
+        {
+          status_id: contants.ACCOUNT_STATUS_DEACTIVE
+        },
+        {
+          where: { id: status_id }
+        }
+      ).then(async res => {
+        return res;
+      })
+    }
+    catch (err) {
       console.log(err);
     }
   }

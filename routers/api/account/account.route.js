@@ -4,10 +4,22 @@ const Account = require("../../../models/Account");
 const account_dao = require("../../../daos/account.dao");
 const auth = require("../../../middlleware/auth.middleware");
 
+
 router.get("/", async (req, res) => {
     try {
         const account = await account_dao.getAccounts();
         res.json(account);
+    } catch (err) {
+        console.log(err.message);
+        res.send("Server error");
+    }
+});
+
+router.get("/:id", async (req, res) => {
+    const id = req.params.id;
+    try {
+        const account = await account_dao.getAccountById(id);
+        res.send(account);
     } catch (err) {
         console.log(err.message);
         res.send("Server error");
@@ -46,18 +58,4 @@ router.put("/", async (req, res) => {
         res.send("Server error");
     }
 })
-
-// router.delete("/:id", async (req, res) => {
-//     const id = req.params.id;
-//     try {
-//         const account = await Account.destroy({
-//             where: { id: id }
-//         })
-//         res.status(200).send("Delete Account by id:" + id + " susscessfully.");
-//     } catch (err) {
-//         console.log(err.message);
-//         res.send("Server error");
-//     }
-// });
-
 module.exports = router;
