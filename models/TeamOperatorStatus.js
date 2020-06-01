@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../config/db-connection");
 
 const TeamOperatorStatus = db.define(
-    "teamoperastatus",
+    "teamoperatorstatus",
     {
         id: {
             type: Sequelize.INTEGER,

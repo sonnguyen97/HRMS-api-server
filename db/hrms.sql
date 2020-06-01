@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: gmhrs
+-- Host: localhost    Database: hrms
 -- ------------------------------------------------------
--- Server version	8.0.20
+-- Server version	8.0.13
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -18,22 +18,21 @@
 --
 -- Table structure for table `account`
 --
-create database hrms;
-use hrms;
+
 DROP TABLE IF EXISTS `account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `account` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `password` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   `modified_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `status_id` int DEFAULT NULL,
+  `status_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_account_status_idx` (`status_id`),
   CONSTRAINT `fk_account_status` FOREIGN KEY (`status_id`) REFERENCES `accountoperatorstatus` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +41,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` VALUES (1,'people 1','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92','2020-05-31 11:37:21','2020-05-31 11:37:21',2),(2,'people 2','cf7a73ab7dd04e7a4cfc8326bf48a7ed692176e07425a5c26e63857bc70a074d','2020-05-31 11:37:41','2020-05-31 11:37:41',1),(3,'people 3','b1254473305de2a155933dd1b7987630f4d8bd19d781902b5d117496442b31b5','2020-05-31 11:37:46','2020-05-31 11:37:46',1);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,12 +51,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accountoperatorstatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `accountoperatorstatus` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,6 +65,7 @@ CREATE TABLE `accountoperatorstatus` (
 
 LOCK TABLES `accountoperatorstatus` WRITE;
 /*!40000 ALTER TABLE `accountoperatorstatus` DISABLE KEYS */;
+INSERT INTO `accountoperatorstatus` VALUES (1,'active'),(2,'deactive');
 /*!40000 ALTER TABLE `accountoperatorstatus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,18 +75,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `department`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `department` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `description` varchar(45) DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   `modified_date` timestamp NULL DEFAULT NULL,
-  `status_id` int DEFAULT NULL,
+  `status_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_department_status_idx` (`status_id`),
   CONSTRAINT `fk_department_status` FOREIGN KEY (`status_id`) REFERENCES `departmentoperastatus` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,6 +95,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
+INSERT INTO `department` VALUES (1,'HR','number 2','2020-06-01 09:51:30','2020-06-01 02:51:30',1);
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,10 +105,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `department_employcee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `department_employcee` (
-  `department_id` int NOT NULL,
-  `employcee_id` int NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `employcee_id` int(11) NOT NULL,
   PRIMARY KEY (`department_id`,`employcee_id`),
   KEY `fk_department_employcee_employcee_idx` (`employcee_id`),
   CONSTRAINT `fk_department_employcee_department` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`) ON DELETE CASCADE,
@@ -129,13 +131,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `departmentoperastatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `departmentoperastatus` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `departmentoperastatuscol` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,6 +145,7 @@ CREATE TABLE `departmentoperastatus` (
 
 LOCK TABLES `departmentoperastatus` WRITE;
 /*!40000 ALTER TABLE `departmentoperastatus` DISABLE KEYS */;
+INSERT INTO `departmentoperastatus` VALUES (1,'active'),(2,'deactive');
 /*!40000 ALTER TABLE `departmentoperastatus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,25 +155,25 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `employee` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `primary_email` varchar(45) DEFAULT NULL,
-  `personal_email` varchar(45) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `primary_email` varchar(200) DEFAULT NULL,
+  `personal_email` varchar(200) DEFAULT NULL,
   `phone` varchar(45) DEFAULT NULL,
   `first_name` varchar(45) DEFAULT NULL,
   `last_name` varchar(45) DEFAULT NULL,
   `address` varchar(300) DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   `modified_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `status_id` int DEFAULT NULL,
-  `role_id` int DEFAULT NULL,
+  `status_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_employcee_status_idx` (`status_id`),
   KEY `fk_employcee_role_idx` (`role_id`),
-  CONSTRAINT `fk_employcee_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
-  CONSTRAINT `fk_employcee_status` FOREIGN KEY (`status_id`) REFERENCES `employeeoperastatus` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_employee_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
+  CONSTRAINT `fk_employee_status` FOREIGN KEY (`status_id`) REFERENCES `employeeoperastatus` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,6 +182,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES (2,'thanhpvse2274@fpt.edu.vn','hehehihi@gmail.com','0981875045','phan','thanh','bien hoa, dong nai, viet nam','2020-06-01 09:51:30','2020-06-01 02:51:30',1,1),(4,'thanhpvse62274@fpt.edu','hehehihi@gmail.com','0981875045','phan','thanh','bien hoa, dong nai, viet nam','2020-06-01 03:02:38','2020-06-01 03:02:38',1,2);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,12 +192,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `employeeoperastatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `employeeoperastatus` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,6 +206,7 @@ CREATE TABLE `employeeoperastatus` (
 
 LOCK TABLES `employeeoperastatus` WRITE;
 /*!40000 ALTER TABLE `employeeoperastatus` DISABLE KEYS */;
+INSERT INTO `employeeoperastatus` VALUES (1,'active'),(2,'deactive');
 /*!40000 ALTER TABLE `employeeoperastatus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,12 +216,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `role` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,6 +230,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'admin'),(2,'employee');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,18 +240,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `team`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `team` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `description` varchar(45) DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   `modified_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `status_id` int DEFAULT NULL,
+  `status_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_team_status_idx` (`status_id`),
   CONSTRAINT `fk_team_status` FOREIGN KEY (`status_id`) REFERENCES `teamoperastatus` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,33 +260,35 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
+INSERT INTO `team` VALUES (1,'capstonse','number 1','2020-06-01 09:51:30','2020-06-01 02:51:30',1);
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `team_employcee`
+-- Table structure for table `team_employee`
 --
 
-DROP TABLE IF EXISTS `team_employcee`;
+DROP TABLE IF EXISTS `team_employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `team_employcee` (
-  `employcee_id` int NOT NULL,
-  `team_id` int NOT NULL,
-  PRIMARY KEY (`employcee_id`,`team_id`),
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `team_employee` (
+  `employee_id` int(11) NOT NULL,
+  `team_id` int(11) NOT NULL,
+  PRIMARY KEY (`employee_id`,`team_id`),
   KEY `fk_team_employcee_team_idx` (`team_id`),
-  CONSTRAINT `fk_team_employcee_employcee` FOREIGN KEY (`employcee_id`) REFERENCES `employee` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_team_employcee_employcee` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_team_employcee_team` FOREIGN KEY (`team_id`) REFERENCES `team` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `team_employcee`
+-- Dumping data for table `team_employee`
 --
 
-LOCK TABLES `team_employcee` WRITE;
-/*!40000 ALTER TABLE `team_employcee` DISABLE KEYS */;
-/*!40000 ALTER TABLE `team_employcee` ENABLE KEYS */;
+LOCK TABLES `team_employee` WRITE;
+/*!40000 ALTER TABLE `team_employee` DISABLE KEYS */;
+INSERT INTO `team_employee` VALUES (2,1),(4,1);
+/*!40000 ALTER TABLE `team_employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -290,12 +297,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `teamoperastatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `teamoperastatus` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -304,6 +311,7 @@ CREATE TABLE `teamoperastatus` (
 
 LOCK TABLES `teamoperastatus` WRITE;
 /*!40000 ALTER TABLE `teamoperastatus` DISABLE KEYS */;
+INSERT INTO `teamoperastatus` VALUES (1,'active'),(2,'deactive');
 /*!40000 ALTER TABLE `teamoperastatus` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -316,4 +324,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-31 17:59:09
+-- Dump completed on 2020-06-01 11:08:19

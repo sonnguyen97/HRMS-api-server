@@ -2,6 +2,7 @@ var CryptoJS = require("crypto-js");
 const Account = require("../models/Account");
 const Randomstring = require("randomstring");
 const contants = require("../contants/contants");
+const AccountStatus = require("../models/AccountOperatorStatus");
 
 //create account
 module.exports = {
@@ -47,7 +48,13 @@ module.exports = {
   getAccounts: async () => {
     try {
       return await Account.findAll(
-        { where: { status_id: contants.ACCOUNT_STATUS_ACTIVE } }
+        {
+          include: [{
+            model: AccountStatus,
+            attributes: ['name']
+            // where: id
+          }],
+          where: { status_id: contants.ACCOUNT_STATUS_ACTIVE } }
       ).then(async res => {
         return res;
       })

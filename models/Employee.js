@@ -13,7 +13,7 @@ const Employee = db.define(
         primary_email: {
             type: Sequelize.STRING
         },
-        personal_mail: {
+        personal_email: {
             type: Sequelize.STRING
         },
         phone: {
@@ -53,12 +53,12 @@ EmployeeOperatorStatus.hasMany(Employee, {
 });
 //role
 Employee.belongsTo(Role, {
-    foreignKey: "status_id",
+    foreignKey: "role_id",
     sourceKey: "id"
 });
 Role.hasMany(Employee, {
-    foreignKey: "status_id",
+    foreignKey: "role_id",
     sourceKey: "id"
 });
 
-module.exports = Account;
+module.exports = Employee;

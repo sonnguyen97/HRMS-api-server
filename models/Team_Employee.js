@@ -13,6 +13,9 @@ const Team_Employee = db.define(
         team_id: {
             type: Sequelize.INTEGER,
             primaryKey: true
+        },
+        modified_date: {
+            type: Sequelize.TIME
         }
     },
     {
@@ -25,7 +28,7 @@ Team_Employee.belongsTo(Employee, {
     foreignKey: "employee_id",
     sourceKey: "id"
 });
-Account.hasMany(Account_Team, {
+Employee.hasMany(Team_Employee, {
     foreignKey: "employee_id",
     sourceKey: "id"
 });
