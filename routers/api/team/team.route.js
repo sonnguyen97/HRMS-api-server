@@ -13,8 +13,8 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/byID", async (req, res) => {
-    const id = req.body.id;
+router.get("/:id", async (req, res) => {
+    const id = req.params.id;
     try {
         const team = await team_dao.findByPk(id);
         res.json(team);
