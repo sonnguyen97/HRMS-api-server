@@ -13,6 +13,9 @@ const Team_Employee = db.define(
         team_id: {
             type: Sequelize.INTEGER,
             primaryKey: true
+        },
+        modified_date: {
+            type: Sequelize.TIME
         }
     },
     {
