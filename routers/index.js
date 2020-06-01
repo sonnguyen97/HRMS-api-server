@@ -10,5 +10,6 @@ router.use("/accountOpetatorStatus", require("./api/AccountOperatorStatus/Accoun
 // router.use("/accountTeam", require("./api/account_team/account_team.route"));
 router.use("/teamEmployee", require("./api/team_employee/team_employee.route"));
 router.use("/employees", require("./api/employee/employee.route"));
+router.use("departmentEmployee", require("./api/department_employee/department_employee.route"));
 
 module.exports = router;

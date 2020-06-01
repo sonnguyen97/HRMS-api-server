@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const AccountTeam = require("../../../models/Account_Team");
-const account_team_dao = require("../../../daos/accountTeam.dao");
+const Team_Employee = require("../../../models/Team_Employee");
+const team_employee_dao = require("../../../daos/team_employee.dao");
+const Employee = require("../../../models/Employee");
 
 router.get("/", async (req, res) => {
     try {
-        var list = await AccountTeam.findAll();
+        var list = await Team_Employee.findAll();
         res.json(list);
     } catch (err) {
         console.log(err);
@@ -17,7 +18,12 @@ router.get("/:id", async (req, res) => {
     const teamId = req.params.id;
     try {
         // var listAccount = account_team_dao.getAllAccountByTeamId(teamId);
-        var listAccount = AccountTeam.findAll({
+        var listAccount = Team_Employee.findAll({
+            include:[{
+                model: Employee,
+                as : 'employee',
+                attributes: [''],
+            }], 
             where: {team_id: teamId}
         })
         console.log(listAccount);
@@ -29,10 +35,10 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    var listIdAcc = req.body.accId;
+    var employee = req.body.empId;
     var team = req.body.teamId;
     try {
-        var result = await account_team_dao.createAccountsTeam(listIdAcc, team);
+        var result = await team_employee_dao.createTeamEmployee(employee,team);
         res.json("Success");
     } catch (err) {
         console.log(err);
