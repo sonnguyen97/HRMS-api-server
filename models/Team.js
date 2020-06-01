@@ -12,6 +12,9 @@ const Team = db.define(
         name: {
             type: Sequelize.STRING,
         },
+        email: {
+            type: Sequelize.STRING,
+        },
         created_date: {
             type: Sequelize.DATE
         },
