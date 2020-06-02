@@ -66,6 +66,8 @@ router.put("/", async (req, res) => {
                 message: "Update Department fail!"
             }
             res.json(response);
+        } else { 
+            res.json({"status": "No Changed"});
         }
     } catch (err) {
         console.log(err.message);

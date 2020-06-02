@@ -7,7 +7,7 @@ const AccountStatus = require("../models/AccountOperatorStatus");
 //create account
 module.exports = {
   createAccount: async (acc) => {
-    var passwordRandom = Randomstring.generate(6);
+    var passwordRandom = Randomstring.generate(8);
     var passwordEncrypt = CryptoJS.SHA256(passwordRandom);
     try {
       var checkAccountExisted = await Account.count({ where: { email: acc.email } });
