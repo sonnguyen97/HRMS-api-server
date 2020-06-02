@@ -38,12 +38,12 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    var employee = req.body.empId;
-    var department = req.body.departmentId;
+    var employeeID = req.body.empId;
+    var departmentID = req.body.departmentId;
     try {
-        var result = await department_employee_dao.createDepartmentEmployee(employee,department);
+        var result = await department_employee_dao.createDepartmentEmployee(employeeID, departmentID);
         res.json("Success");
-    } catch (err) { 
+    } catch (err) {
         console.log(err);
         res.send("server error");
     }

@@ -1,5 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `hrms` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `hrms`;
+
 -- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: hrms
@@ -27,8 +26,8 @@ DROP TABLE IF EXISTS `account`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `account` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `password` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   `modified_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status_id` int DEFAULT NULL,
@@ -56,7 +55,7 @@ DROP TABLE IF EXISTS `accountoperatorstatus`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accountoperatorstatus` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
