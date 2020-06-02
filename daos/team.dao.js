@@ -8,8 +8,7 @@ module.exports = {
                 name: team.name,
                 created_date: Date.now(),
                 status_id: team.status_id,
-                email: team.email,
-                d
+                email: team.email
             }).then(async res => {
                 return res;
             })
