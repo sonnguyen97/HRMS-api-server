@@ -11,10 +11,6 @@ module.exports = {
                     include: [{
                         model: Role,
                         attributes: ['name']
-                    },
-                    {
-                        model: Department,
-                        attributes: ['id', 'name']
                     }],
                     where: { status_id: contants.EMPLOYEE_STATUS_ACTIVE }
                 }
@@ -52,10 +48,6 @@ module.exports = {
                     include: [{
                         model: Role,
                         attributes: ['name']
-                    },
-                    {
-                        model: Department,
-                        attributes: ['id', 'name']
                     }],
                     where: { id: id }
                 },
