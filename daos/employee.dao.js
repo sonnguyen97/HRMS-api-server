@@ -1,6 +1,7 @@
 const Employee = require("../models/Employee");
 const contants = require("../contants/contants");
 const Role = require("../models/Role");
+const Department = require("../models/Department")
 
 module.exports = {
     getAllEmployeee: async () => {
@@ -10,6 +11,10 @@ module.exports = {
                     include: [{
                         model: Role,
                         attributes: ['name']
+                    },
+                    {
+                        model: Department,
+                        attributes: ['id', 'name']
                     }],
                     where: { status_id: contants.EMPLOYEE_STATUS_ACTIVE }
                 }
@@ -44,6 +49,14 @@ module.exports = {
         try {
             return await Employee.findOne(
                 {
+                    include: [{
+                        model: Role,
+                        attributes: ['name']
+                    },
+                    {
+                        model: Department,
+                        attributes: ['id', 'name']
+                    }],
                     where: { id: id }
                 },
                 { where: { status_id: contants.EMPLOYEE_STATUS_ACTIVE } }
@@ -81,8 +94,8 @@ module.exports = {
                         phone: employee.phone,
                         address: employee.address
                     },
-                    { where: { id: employee.id }},
-                    
+                    { where: { id: employee.id } },
+
                 )
             } else { return false };
         } catch (err) {
