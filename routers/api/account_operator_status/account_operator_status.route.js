@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const accountOperatorStatus_dao = require("../../../daos/accountOperatorStatus.dao");
+const accountOperatorStatus_dao = require("../../../daos/account_operator_status.dao");
 const AccountStatus = require("../../../models/AccountOperatorStatus");
 
 router.get("/", async (req, res) => {

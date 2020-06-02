@@ -13,8 +13,8 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/byID", async (req, res) => {
-    const id = req.body.id;
+router.get("/:id", async (req, res) => {
+    const id = req.params.id;
     try {
         const department = await department_dao.findByPk(id);
         res.json(department);
@@ -66,6 +66,8 @@ router.put("/", async (req, res) => {
                 message: "Update Department fail!"
             }
             res.json(response);
+        } else { 
+            res.json({"status": "No Changed"});
         }
     } catch (err) {
         console.log(err.message);

@@ -7,7 +7,9 @@ module.exports = {
             return await Team.create({
                 name: team.name,
                 created_date: Date.now(),
-                status_id: team.status_id
+                status_id: team.status_id,
+                email: team.email,
+                d
             }).then(async res => {
                 return res;
             })
@@ -45,7 +47,6 @@ module.exports = {
             return await Team.findAll({
                 where: { status_id: 1 }
             }).then(async res => {
-                response.id = res
                 return res;
             })
         } catch (err) {

@@ -23,6 +23,28 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+router.post("/addToTeam", async (req, res) => {
+    const listEmployee = req.body;
+    try {
+        const emp = await employe_dao.addEmployeeToTeam(listEmployee);
+        
+        if(emp) {
+            res.json({ 
+                status: "success",
+                message: "adding employee to team success!"
+            });
+        } else { 
+            res.json({ 
+                status: "fail",
+                message: "adding employee to team fail!"
+            });
+        }
+    } catch (err) {
+        console.log(err);
+        res.send("server error");
+    }
+});
+
 router.post("/", async (req, res) => {
     var newEmp = req.body;
     try {

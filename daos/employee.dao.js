@@ -1,6 +1,7 @@
 const Employee = require("../models/Employee");
 const contants = require("../contants/contants");
 const Role = require("../models/Role");
+const Team_Employee = require("../models/Team_Employee");
 
 module.exports = {
     getAllEmployeee: async () => {
@@ -81,12 +82,30 @@ module.exports = {
                         phone: employee.phone,
                         address: employee.address
                     },
-                    { where: { id: employee.id }},
-                    
+                    { where: { id: employee.id } },
+
                 )
             } else { return false };
         } catch (err) {
             console.log(err);
         }
+    },
+    addEmployeeToTeam: async (employee) => {
+        try {
+            var listAccount = employee.listEmployee;
+            var teamId = employee.teamId;
+
+            listAccount.forEach(async account => {
+                await Team_Employee.create({
+                    team_id: teamId,
+                    employee_id: account.employeeId
+                })
+            })
+            return true;
+        } catch (err) {
+            console.log(err);
+            return false;
+        }
     }
+
 }
