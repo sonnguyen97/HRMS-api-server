@@ -45,6 +45,10 @@ module.exports = {
         try {
             return await Employee.findOne(
                 {
+                    include: [{
+                        model: Role,
+                        attributes: ['name']
+                    }],
                     where: { id: id }
                 },
                 { where: { status_id: contants.EMPLOYEE_STATUS_ACTIVE } }
