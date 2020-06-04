@@ -10,6 +10,8 @@ router.use("/accountOpetatorStatus", require("./api/account_operator_status/acco
 // router.use("/accountTeam", require("./api/account_team/account_team.route"));
 router.use("/teamEmployee", require("./api/team_employee/team_employee.route"));
 router.use("/employees", require("./api/employee/employee.route"));
-router.use("departmentEmployee", require("./api/department_employee/department_employee.route"));
+router.use("/departmentEmployee", require("./api/department_employee/department_employee.route"));
+// api data for synchronize
+router.use("/data-hrms", require("./api/data_sync/index"));
 
 module.exports = router;
