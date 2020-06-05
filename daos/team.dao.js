@@ -66,7 +66,7 @@ module.exports = {
             var team = await Team.findOne({ where: { id: id } });
             return await Team_Employee.findAll({
                 where: { team_id: id },
-                include: [Employee] 
+                include: [Employee]
             }).then(async res => {
                 response.id = team.id;
                 response.groupName = team.name;
