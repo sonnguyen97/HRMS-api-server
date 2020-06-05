@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../config/db-connection");
 const EmployeeOperatorStatus = require("./EmployeeOperatorStatus");
 const Role = require("./Role");
+const Department = require("./Department");
 
 const Employee = db.define(
     "employee",
@@ -58,6 +59,15 @@ Employee.belongsTo(Role, {
 });
 Role.hasMany(Employee, {
     foreignKey: "role_id",
+    sourceKey: "id"
+});
+//Department
+Employee.belongsTo(Department, {
+    foreignKey: "department_id",
+    sourceKey: "id"
+});
+Department.hasMany(Employee, {
+    foreignKey: "department_id",
     sourceKey: "id"
 });
 
