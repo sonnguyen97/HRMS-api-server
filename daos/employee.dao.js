@@ -8,7 +8,12 @@ module.exports = {
         try {
             return await Employee.findAll(
                 {
+
                     include: [{
+                        model: Department,
+                        attributes: ['name']
+                    },
+                    {
                         model: Role,
                         attributes: ['name']
                     }],
