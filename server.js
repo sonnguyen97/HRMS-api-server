@@ -11,11 +11,7 @@ var http = require('http').Server(app);
 http.listen(PORT, () => {
   console.log("Server is running on port " + PORT);
 });
-app.use(
-  cors({
-    origin: true
-  })
-);
+
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(
   session({
