@@ -13,7 +13,6 @@ http.listen(PORT, () => {
 });
 app.use(
   cors({
-    credentials: true,
     origin: true
   })
 );
