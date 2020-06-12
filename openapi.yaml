@@ -1,0 +1,1140 @@
+openapi: 3.0.0
+servers:
+  - url: //petstore.swagger.io/v2
+    description: Default server
+  - url: //petstore.swagger.io/sandbox
+    description: Sandbox server
+info:
+  description: |
+  version: 1.0.0
+  title: Swagger Petstores
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    name: API Support
+    email: apiteam@swagger.io
+    url: http://http://tx-tech.com:4444/
+  x-logo:
+    url: "data:image/png;base64,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"
+    altText: Petstore logo
+  license:
+    name: Apache 2.0
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+# externalDocs:
+#   description: Find out how to create Github repo for your OpenAPI spec.
+#   url: "https://github.com/Rebilly/generator-openapi-repo"
+tags:
+  - name: pet
+    description: Everything about your Pets
+  - name: store
+    description: Access to Petstore orders
+  - name: user
+    description: Operations about user
+  - name: pet_model
+    x-displayName: The Pet Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/Pet" />
+  - name: store_model
+    x-displayName: The Order Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/Order" exampleRef="#/components/examples/Order" showReadOnly={true} showWriteOnly={true} />
+x-tagGroups:
+  - name: TPS
+    tags:
+      - pet
+      - store
+  # - name: MAS
+  #   tags:
+  #     - pet
+  #     - store
+  # - name: R7
+  #   tags:
+  #     - pet
+  #     - store
+  - name: User Management
+    tags:
+      - user
+  - name: Models
+    tags:
+      - pet_model
+      - store_model
+paths:
+  /pet:
+    parameters:
+      - name: Accept-Language
+        in: header
+        description: "The language you prefer for messages. Supported values are en-AU, en-CA, en-GB, en-US"
+        example: en-US
+        required: false
+        schema:
+          type: string
+          default: en-AU
+      - name: cookieParam
+        in: cookie
+        description: Some cookie
+        required: true
+        schema:
+          type: integer
+          format: int64
+    post:
+      tags:
+        - pet
+      summary: Add a new pet to the store
+      description: Add new pet to the store inventory.
+      operationId: addPet
+      responses:
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Pet not found
+        "405":
+          description: Validation exception
+        "200":
+          description: Successfully added pet
+      security:
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
+      requestBody:
+        $ref: "#/components/requestBodies/Pet"
+    put:
+      tags:
+        - pet
+      summary: Update an existing pet
+      description: ""
+      operationId: updatePet
+      responses:
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Pet not found
+        "405":
+          description: Validation exception
+      security:
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
+      # x-codeSamples:
+      #   - lang: PHP
+      #     source: |
+      #       $form = new \PetStore\Entities\Pet();
+      #       $form->setPetId(1);
+      #       $form->setPetType("Dog");
+      #       $form->setName("Rex");
+      #       // set other fields
+      #       try {
+      #           $pet = $client->pets()->update($form);
+      #       } catch (UnprocessableEntityException $e) {
+      #           var_dump($e->getErrors());
+      #       }
+      requestBody:
+        $ref: "#/components/requestBodies/Pet"
+  "/pet/{petId}":
+    get:
+      tags:
+        - pet
+      summary: Find pet by ID
+      description: Returns a single pet
+      operationId: getPetById
+      parameters:
+        - name: petId
+          in: path
+          description: ID of pet to return
+          required: true
+          deprecated: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pet"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Pet"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Pet not found
+      security:
+        - api_key: []
+    post:
+      tags:
+        - pet
+      summary: Updates a pet in the store with form data
+      description: ""
+      operationId: updatePetWithForm
+      parameters:
+        - name: petId
+          in: path
+          description: ID of pet that needs to be updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "405":
+          description: Invalid input
+      security:
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: Updated name of the pet
+                  type: string
+                status:
+                  description: Updated status of the pet
+                  type: string
+    delete:
+      tags:
+        - pet
+      summary: Deletes a pet
+      description: ""
+      operationId: deletePet
+      parameters:
+        - name: api_key
+          in: header
+          required: false
+          schema:
+            type: string
+          example: "Bearer <TOKEN>"
+        - name: petId
+          in: path
+          description: Pet id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "400":
+          description: Invalid pet value
+      security:
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
+  "/pet/{petId}/uploadImage":
+    post:
+      tags:
+        - pet
+      summary: uploads an image
+      description: ""
+      operationId: uploadFile
+      parameters:
+        - name: petId
+          in: path
+          description: ID of pet to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+      security:
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+  /pet/findByStatus:
+    get:
+      tags:
+        - pet
+      summary: Finds Pets by status
+      description: Multiple status values can be provided with comma separated strings
+      operationId: findPetsByStatus
+      parameters:
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: true
+          style: form
+          schema:
+            type: array
+            minItems: 1
+            maxItems: 3
+            items:
+              type: string
+              enum:
+                - available
+                - pending
+                - sold
+              default: available
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pet"
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pet"
+        "400":
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
+  /pet/findByTags:
+    get:
+      tags:
+        - pet
+      summary: Finds Pets by tags
+      description: >-
+        Multiple tags can be provided with comma separated strings. Use tag1,
+        tag2, tag3 for testing.
+      operationId: findPetsByTags
+      deprecated: true
+      parameters:
+        - name: tags
+          in: query
+          description: Tags to filter by
+          required: true
+          style: form
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pet"
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pet"
+        "400":
+          description: Invalid tag value
+      security:
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
+  /store/inventory:
+    get:
+      tags:
+        - store
+      summary: Returns pet inventories by status
+      description: Returns a map of status codes to quantities
+      operationId: getInventory
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
+                  format: int32
+      security:
+        - api_key: []
+  /store/order:
+    post:
+      tags:
+        - store
+      summary: Place an order for a pet
+      description: ""
+      operationId: placeOrder
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "400":
+          description: Invalid Order
+          content:
+            application/json:
+              example:
+                status: 400
+                message: "Invalid Order"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Order"
+        description: order placed for purchasing the pet
+        required: true
+  "/store/order/{orderId}":
+    get:
+      tags:
+        - store
+      summary: Find purchase order by ID
+      description: >-
+        For valid response try integer IDs with value <= 5 or > 10. Other values
+        will generated exceptions
+      operationId: getOrderById
+      parameters:
+        - name: orderId
+          in: path
+          description: ID of pet that needs to be fetched
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            maximum: 5
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Order not found
+    delete:
+      tags:
+        - store
+      summary: Delete purchase order by ID
+      description: >-
+        For valid response try integer IDs with value < 1000. Anything above
+        1000 or nonintegers will generate API errors
+      operationId: deleteOrder
+      parameters:
+        - name: orderId
+          in: path
+          description: ID of the order that needs to be deleted
+          required: true
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Order not found
+  /store/subscribe:
+    post:
+      tags:
+        - store
+      summary: Subscribe to the Store events
+      description: Add subscription for a store events
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                callbackUrl:
+                  type: string
+                  format: uri
+                  description: This URL will be called by the server when the desired event will occur
+                  example: https://myserver.com/send/callback/here
+                eventName:
+                  type: string
+                  description: Event name for the subscription
+                  enum:
+                    - orderInProgress
+                    - orderShipped
+                    - orderDelivered
+                  example: orderInProgress
+              required:
+                - callbackUrl
+                - eventName
+      responses:
+        "201":
+          description: Subscription added
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscriptionId:
+                    type: string
+                    example: AAA-123-BBB-456
+      callbacks:
+        orderInProgress:
+          "{$request.body#/callbackUrl}?event={$request.body#/eventName}":
+            servers:
+              - url: //callback-url.path-level/v1
+                description: Path level server 1
+              - url: //callback-url.path-level/v2
+                description: Path level server 2
+            post:
+              summary: Order in Progress (Summary)
+              description: A callback triggered every time an Order is updated status to "inProgress" (Description)
+              externalDocs:
+                description: Find out more
+                url: "https://more-details.com/demo"
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        orderId:
+                          type: string
+                          example: "123"
+                        timestamp:
+                          type: string
+                          format: date-time
+                          example: "2018-10-19T16:46:45Z"
+                        status:
+                          type: string
+                          example: "inProgress"
+                  application/xml:
+                    schema:
+                      type: object
+                      properties:
+                        orderId:
+                          type: string
+                          example: "123"
+                    example: |
+                      <?xml version="1.0" encoding="UTF-8"?>
+                      <root>
+                        <orderId>123</orderId>
+                        <status>inProgress</status>
+                        <timestamp>2018-10-19T16:46:45Z</timestamp>
+                      </root>
+              responses:
+                "200":
+                  description: Callback successfully processed and no retries will be performed
+                  content:
+                    application/json:
+                      schema:
+                        type: object
+                        properties:
+                          someProp:
+                            type: string
+                            example: "123"
+                "299":
+                  description: Response for cancelling subscription
+                "500":
+                  description: Callback processing failed and retries will be performed
+              # x-codeSamples:
+              #   - lang: "C#"
+              #     source: |
+              #       PetStore.v1.Pet pet = new PetStore.v1.Pet();
+              #       pet.setApiKey("your api key");
+              #       pet.petType = PetStore.v1.Pet.TYPE_DOG;
+              #       pet.name = "Rex";
+              #       // set other fields
+              #       PetStoreResponse response = pet.create();
+              #       if (response.statusCode == HttpStatusCode.Created)
+              #       {
+              #         // Successfully created
+              #       }
+              #       else
+              #       {
+              #         // Something wrong -- check response for errors
+              #         Console.WriteLine(response.getRawResponse());
+              #       }
+              #   - lang: PHP
+              #     source: |
+              #       $form = new \PetStore\Entities\Pet();
+              #       $form->setPetType("Dog");
+              #       $form->setName("Rex");
+              #       // set other fields
+              #       try {
+              #           $pet = $client->pets()->create($form);
+              #       } catch (UnprocessableEntityException $e) {
+              #           var_dump($e->getErrors());
+              #       }
+            put:
+              description: Order in Progress (Only Description)
+              servers:
+                - url: //callback-url.operation-level/v1
+                  description: Operation level server 1 (Operation override)
+                - url: //callback-url.operation-level/v2
+                  description: Operation level server 2 (Operation override)
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        orderId:
+                          type: string
+                          example: "123"
+                        timestamp:
+                          type: string
+                          format: date-time
+                          example: "2018-10-19T16:46:45Z"
+                        status:
+                          type: string
+                          example: "inProgress"
+                  application/xml:
+                    schema:
+                      type: object
+                      properties:
+                        orderId:
+                          type: string
+                          example: "123"
+                    example: |
+                      <?xml version="1.0" encoding="UTF-8"?>
+                      <root>
+                        <orderId>123</orderId>
+                        <status>inProgress</status>
+                        <timestamp>2018-10-19T16:46:45Z</timestamp>
+                      </root>
+              responses:
+                "200":
+                  description: Callback successfully processed and no retries will be performed
+                  content:
+                    application/json:
+                      schema:
+                        type: object
+                        properties:
+                          someProp:
+                            type: string
+                            example: "123"
+        orderShipped:
+          "{$request.body#/callbackUrl}?event={$request.body#/eventName}":
+            post:
+              description: |
+                Very long description
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum.
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        orderId:
+                          type: string
+                          example: "123"
+                        timestamp:
+                          type: string
+                          format: date-time
+                          example: "2018-10-19T16:46:45Z"
+                        estimatedDeliveryDate:
+                          type: string
+                          format: date-time
+                          example: "2018-11-11T16:00:00Z"
+              responses:
+                "200":
+                  description: Callback successfully processed and no retries will be performed
+        orderDelivered:
+          ? "http://notificationServer.com?url={$request.body#/callbackUrl}&event={$request.body#/eventName}"
+          : post:
+              deprecated: true
+              summary: Order delivered
+              description: A callback triggered every time an Order is delivered to the recipient
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        orderId:
+                          type: string
+                          example: "123"
+                        timestamp:
+                          type: string
+                          format: date-time
+                          example: "2018-10-19T16:46:45Z"
+              responses:
+                "200":
+                  description: Callback successfully processed and no retries will be performed
+  /user:
+    post:
+      tags:
+        - user
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      responses:
+        default:
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        description: Created user object
+        required: true
+  "/user/{username}":
+    get:
+      tags:
+        - user
+      summary: Get user by user name
+      description: ""
+      operationId: getUserByName
+      parameters:
+        - name: username
+          in: path
+          description: "The name that needs to be fetched. Use user1 for testing. "
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found
+    put:
+      tags:
+        - user
+      summary: Updated user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      parameters:
+        - name: username
+          in: path
+          description: name that need to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        "400":
+          description: Invalid user supplied
+        "404":
+          description: User not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        description: Updated user object
+        required: true
+    delete:
+      tags:
+        - user
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      parameters:
+        - name: username
+          in: path
+          description: The name that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found
+  /user/createWithArray:
+    post:
+      tags:
+        - user
+      summary: Creates list of users with given input array
+      description: ""
+      operationId: createUsersWithArrayInput
+      responses:
+        default:
+          description: successful operation
+      requestBody:
+        $ref: "#/components/requestBodies/UserArray"
+  /user/createWithList:
+    post:
+      tags:
+        - user
+      summary: Creates list of users with given input array
+      description: ""
+      operationId: createUsersWithListInput
+      responses:
+        default:
+          description: successful operation
+      requestBody:
+        $ref: "#/components/requestBodies/UserArray"
+  /user/login:
+    get:
+      tags:
+        - user
+      summary: Logs user into the system
+      description: ""
+      operationId: loginUser
+      parameters:
+        - name: username
+          in: query
+          description: The user name for login
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              description: date in UTC when token expires
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                response:
+                  value: OK
+            application/xml:
+              schema:
+                type: string
+              examples:
+                response:
+                  value: <Message> OK </Message>
+            text/plain:
+              examples:
+                response:
+                  value: OK
+        "400":
+          description: Invalid username/password supplied
+  /user/logout:
+    get:
+      tags:
+        - user
+      summary: Logs out current logged in user session
+      description: ""
+      operationId: logoutUser
+      responses:
+        default:
+          description: successful operation
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+    Cat:
+      description: A representation of a cat
+      allOf:
+        - $ref: "#/components/schemas/Pet"
+        - type: object
+          properties:
+            huntingSkill:
+              type: string
+              description: The measured skill for hunting
+              default: lazy
+              example: adventurous
+              enum:
+                - clueless
+                - lazy
+                - adventurous
+                - aggressive
+          required:
+            - huntingSkill
+    Category:
+      type: object
+      properties:
+        id:
+          description: Category ID
+          allOf:
+            - $ref: "#/components/schemas/Id"
+        name:
+          description: Category name
+          type: string
+          minLength: 1
+        sub:
+          description: Test Sub Category
+          type: object
+          properties:
+            prop1:
+              type: string
+              description: Dumb Property
+      xml:
+        name: Category
+    Dog:
+      description: A representation of a dog
+      allOf:
+        - $ref: "#/components/schemas/Pet"
+        - type: object
+          properties:
+            packSize:
+              type: integer
+              format: int32
+              description: The size of the pack the dog is from
+              default: 1
+              minimum: 1
+          required:
+            - packSize
+    HoneyBee:
+      description: A representation of a honey bee
+      allOf:
+        - $ref: "#/components/schemas/Pet"
+        - type: object
+          properties:
+            honeyPerDay:
+              type: number
+              description: Average amount of honey produced per day in ounces
+              example: 3.14
+              multipleOf: .01
+          required:
+            - honeyPerDay
+    Id:
+      type: integer
+      format: int64
+      readOnly: true
+    Order:
+      type: object
+      properties:
+        id:
+          description: Order ID
+          allOf:
+            - $ref: "#/components/schemas/Id"
+        petId:
+          description: Pet ID
+          allOf:
+            - $ref: "#/components/schemas/Id"
+        quantity:
+          type: integer
+          format: int32
+          minimum: 1
+          default: 1
+        shipDate:
+          description: Estimated ship date
+          type: string
+          format: date-time
+        status:
+          type: string
+          description: Order Status
+          enum:
+            - placed
+            - approved
+            - delivered
+        complete:
+          description: Indicates whenever order was completed or not
+          type: boolean
+          default: false
+          readOnly: true
+        requestId:
+          description: Unique Request Id
+          type: string
+          writeOnly: true
+      xml:
+        name: Order
+    Pet:
+      type: object
+      required:
+        - name
+        - photoUrls
+      discriminator:
+        propertyName: petType
+        mapping:
+          cat: "#/components/schemas/Cat"
+          dog: "#/components/schemas/Dog"
+          bee: "#/components/schemas/HoneyBee"
+      properties:
+        id:
+          externalDocs:
+            description: "Find more info here"
+            url: "https://example.com"
+          description: Pet ID
+          allOf:
+            - $ref: "#/components/schemas/Id"
+        category:
+          description: Categories this pet belongs to
+          allOf:
+            - $ref: "#/components/schemas/Category"
+        name:
+          description: The name given to a pet
+          type: string
+          example: Guru
+        photoUrls:
+          description: The list of URL to a cute photos featuring pet
+          type: array
+          maxItems: 20
+          xml:
+            name: photoUrl
+            wrapped: true
+          items:
+            type: string
+            format: url
+        friend:
+          allOf:
+            - $ref: "#/components/schemas/Pet"
+        tags:
+          description: Tags attached to the pet
+          type: array
+          minItems: 1
+          xml:
+            name: tag
+            wrapped: true
+          items:
+            $ref: "#/components/schemas/Tag"
+        status:
+          type: string
+          description: Pet status in the store
+          enum:
+            - available
+            - pending
+            - sold
+        petType:
+          description: Type of a pet
+          type: string
+      xml:
+        name: Pet
+    Tag:
+      type: object
+      properties:
+        id:
+          description: Tag ID
+          allOf:
+            - $ref: "#/components/schemas/Id"
+        name:
+          description: Tag name
+          type: string
+          minLength: 1
+      xml:
+        name: Tag
+    User:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        pet:
+          oneOf:
+            - $ref: "#/components/schemas/Pet"
+            - $ref: "#/components/schemas/Tag"
+        username:
+          description: User supplied username
+          type: string
+          minLength: 4
+          example: John78
+        firstName:
+          description: User first name
+          type: string
+          minLength: 1
+          example: John
+        lastName:
+          description: User last name
+          type: string
+          minLength: 1
+          example: Smith
+        email:
+          description: User email address
+          type: string
+          format: email
+          example: john.smith@example.com
+        password:
+          type: string
+          description: >-
+            User password, MUST contain a mix of upper and lower case letters,
+            as well as digits
+          format: password
+          minLength: 8
+          pattern: "/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/"
+          example: drowssaP123
+        phone:
+          description: User phone number in international format
+          type: string
+          pattern: '/^\+(?:[0-9]-?){6,14}[0-9]$/'
+          example: +1-202-555-0192
+        userStatus:
+          description: User status
+          type: integer
+          format: int32
+      xml:
+        name: User
+  requestBodies:
+    Pet:
+      content:
+        application/json:
+          schema:
+            allOf:
+              - description: My Pet
+                title: Pettie
+              - $ref: "#/components/schemas/Pet"
+        application/xml:
+          schema:
+            type: "object"
+            properties:
+              name:
+                type: string
+                description: hooray
+      description: Pet object that needs to be added to the store
+      required: true
+    UserArray:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/User"
+      description: List of user object
+      required: true
+  securitySchemes:
+    petstore_auth:
+      description: |
+        Get access to data while protecting your account credentials.
+        OAuth2 is also a safer and more secure way to give you access.
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: "http://petstore.swagger.io/api/oauth/dialog"
+          scopes:
+            "write:pets": modify pets in your account
+            "read:pets": read your pets
+    api_key:
+      description: >
+        For this sample, you can use the api key `special-key` to test the
+        authorization filters.
+      type: apiKey
+      name: api_key
+      in: header
+  examples:
+    Order:
+      value:
+        quantity: 1
+        shipDate: "2018-10-19T16:46:45Z"
+        status: placed
+        complete: false
