@@ -5,6 +5,7 @@ module.exports = {
         team_email: '',
         description: '',
         modified_date: '',
-        is_active: ''
+        is_active: '',
+        listEmployee: [],
     }
 }

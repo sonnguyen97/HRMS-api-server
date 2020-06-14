@@ -34,10 +34,12 @@ Employee.hasMany(Team_Employee, {
 });
 
 Team_Employee.belongsTo(Team, {
+    as: 'members',
     foreignKey: "team_id",
     sourceKey: "id"
 });
 Team.hasMany(Team_Employee, {
+    as: 'members',
     foreignKey: "team_id",
     sourceKey: "id"
 });
