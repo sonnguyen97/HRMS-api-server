@@ -10,8 +10,10 @@ const Department = require("./../../../models/Department");
 const Team_Employee = require("./../../../models/Team_Employee");
 
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
+        const offset = req.body.offset;
+        const limit = req.body.limit;
         var structure = {
             employees: [],
             teams: [],
@@ -19,7 +21,11 @@ router.get('/', async (req, res) => {
         }
         //get employees
         var employeeResponse = await Employee.findAll({
-            attributes: ['id', 'primary_email', 'personal_email', 'first_name','last_name', 'modified_date', 'address', 'department_id', 'phone', 'status_id']
+            attributes: ['id', 'primary_email', 'personal_email', 
+            'first_name','last_name', 'modified_date', 'address', 
+            'department_id', 'phone', 'status_id'],
+            limit: limit,
+            offset: offset,
         });
         structure.employees = [...structure.employees, ...employeeResponse];
         // await employeeResponse.map(item => {
