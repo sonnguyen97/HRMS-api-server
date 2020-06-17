@@ -10,10 +10,8 @@ const Department = require("./../../../models/Department");
 const Team_Employee = require("./../../../models/Team_Employee");
 
 
-router.post('/', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        const offset = req.body.offset;
-        const limit = req.body.limit;
         var structure = {
             employees: [],
             teams: [],
@@ -24,24 +22,14 @@ router.post('/', async (req, res) => {
             attributes: ['id', 'primary_email', 'personal_email', 
             'first_name','last_name', 'modified_date', 'address', 
             'department_id', 'phone', 'status_id'],
-            limit: limit,
-            offset: offset,
+            order: [
+                ['primary_email', 'ASC']
+            ]
         });
+        console.log("----Get all employee from HRMS---");
+        
         structure.employees = [...structure.employees, ...employeeResponse];
-        // await employeeResponse.map(item => {
-        //     employee_structure.employee.id = item.id;
-        //     employee_structure.employee.primary_email = item.primary_email;
-        //     employee_structure.employee.personal_email = item.personal_email;
-        //     employee_structure.employee.first_name = item.first_name;
-        //     employee_structure.employee.last_name = item.last_name;
-        //     employee_structure.employee.modified_date = item.modified_date;
-        //     employee_structure.employee.is_active = !item.status_id == 0 ? true : false;
-        //     employee_structure.employee.address = item.address;
-        //     employee_structure.employee.department_id = !item.department_id == null ? item.department_id : 0;
-        //     employee_structure.employee.phone = item.phone;
-        //     structure.employees.push(employee_structure.employee);
-        // })
-        //get teams
+       
         var teamResponse = await Team.findAll({
             include: [
                 {   
