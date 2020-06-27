@@ -21,6 +21,9 @@ const Department = db.define(
         modified_date: {
             type: Sequelize.DATE
         },
+        orgunits_path: {
+            type:Sequelize.STRING
+        }
     },
     {
         timestamps: false,

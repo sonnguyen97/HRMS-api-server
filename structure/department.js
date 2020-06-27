@@ -5,6 +5,7 @@ module.exports = {
         description: '',
         is_active: false,
         path: '',
-        modified_date: ''
+        modified_date: '',
+        orgunits_path: ''
     }
 }
