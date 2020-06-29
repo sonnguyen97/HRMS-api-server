@@ -43,14 +43,10 @@ router.get('/', async (req, res) => {
         structure.teams = [...structure.teams, ...teamResponse];
 
         // get derpartments
-        var departmentResponse = await Department.findAll();
+        var departmentResponse = await Department.findAll({
+            order:[['name', "ASC"]]
+        });
         await departmentResponse.map(item => {
-            department_structure.department.id = item.id;
-            department_structure.department.name = item.name;
-            department_structure.department.description = item.description;
-            department_structure.department.status_id = item.status_id == 1 ? true : false;
-            department_structure.department.modified_date = item.modified_date;
-            department_structure.department.orgunits_path = item.orgunits_path;
             structure.departments.push(item);
         })
 
