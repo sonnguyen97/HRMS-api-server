@@ -44,7 +44,7 @@ router.get('/', async (req, res) => {
 
         // get derpartments
         var departmentResponse = await Department.findAll({
-            order:[['orgunits_path', "ASC"]]
+            order:[['name', "ASC"]]
         });
         await departmentResponse.map(item => {
             structure.departments.push(item);
