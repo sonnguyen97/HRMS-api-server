@@ -22,6 +22,15 @@ router.get('/', async (req, res) => {
             attributes: ['id', 'primary_email', 'personal_email',
                 'first_name', 'last_name', 'modified_date', 'address',
                 'department_id', 'phone', 'status_id'],
+            include: [
+                {
+                    model: Department,
+                    attributes: ['id', 'name'],
+                    where: {
+                        status_id: 1
+                    }
+                }
+            ],
             order: [
                 ['primary_email', 'ASC']
             ]
