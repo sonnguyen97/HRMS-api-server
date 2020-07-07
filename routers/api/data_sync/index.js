@@ -8,6 +8,7 @@ const Employee = require("./../../../models/Employee");
 const Team = require("./../../../models/Team");
 const Department = require("./../../../models/Department");
 const Team_Employee = require("./../../../models/Team_Employee");
+const { mode } = require("crypto-js");
 
 
 router.get('/', async (req, res) => {
@@ -44,10 +45,16 @@ router.get('/', async (req, res) => {
                 {
                     attributes: ['employee_id', 'modified_date'],
                     model: Team_Employee,
+                    include: [
+                        {
+                            attributes: ['primary_email'],
+                            model: Employee
+                        }
+                    ],
                     as: 'members'
                 }],
-                order: [['email', "ASC"]]
-            }
+            order: [['email', "ASC"]]
+        }
         );
 
         structure.teams = [...structure.teams, ...teamResponse];
