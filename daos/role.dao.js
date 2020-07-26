@@ -36,7 +36,9 @@ module.exports = {
     },
     findAllRole: async () => {
         try {
-            return await Role.findAll().then(async res => {
+            return await Role.findAll({
+                attributes: ['id', 'name']
+            }).then(async res => {
                 return res;
             })
         } catch (err) {
@@ -46,6 +48,7 @@ module.exports = {
     findByPk: async (id) => {
         try {
             return await Role.findAll({
+                attributes: ['id', 'name'],
                 where: { id: id }
             })
                 .then(async res => {

@@ -8,7 +8,7 @@ module.exports = {
         try {
             return await Employee.findAll(
                 {
-
+                    attributes: ['id', 'email', 'created_date', 'modified_date'],
                     include: [{
                         model: Department,
                         attributes: ['name']
@@ -50,6 +50,7 @@ module.exports = {
         try {
             return await Employee.findOne(
                 {
+                    attributes: ['id', 'email', 'created_date', 'modified_date'],
                     include: [{
                         model: Role,
                         attributes: ['name']
