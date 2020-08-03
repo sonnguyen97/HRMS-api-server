@@ -29,6 +29,9 @@ const Employee = db.define(
         address: {
             type: Sequelize.STRING
         },
+        position_id: {
+            type: Sequelize.STRING
+        },
         created_date: {
             type: Sequelize.DATE
         },
@@ -54,11 +57,11 @@ EmployeeOperatorStatus.hasMany(Employee, {
 });
 //role
 Employee.belongsTo(Role, {
-    foreignKey: "role_id",
+    foreignKey: "position_id",
     sourceKey: "id"
 });
 Role.hasMany(Employee, {
-    foreignKey: "role_id",
+    foreignKey: "position_id",
     sourceKey: "id"
 });
 //Department
