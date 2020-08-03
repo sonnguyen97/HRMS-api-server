@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
-module.exports = new Sequelize('hrms', 'hrms', 'Z@123456', {
-    host: '50.62.209.157',
+module.exports = new Sequelize('hrms', 'root', 'Zz@123456', {
+    host: '103.143.209.237',
     dialect: 'mysql',
     port: 3306,
     timestamps: false,
