@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const role_dao = require("../../../daos/role.dao");
+const role_dao = require("../../../daos/position.dao");
 const auth = require("../../../middlleware/auth.middleware");
 
 router.get("/", async (req, res) => {
@@ -16,8 +16,8 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     const id = req.params.id;
     try {
-        const role = await role_dao.findByPk(id);
-        res.json(role);
+        const Position = await role_dao.findByPk(id);
+        res.json(Position);
     } catch (err) {
         console.log(err.message);
         res.send("Server error");
@@ -32,13 +32,13 @@ router.post("/", async (req, res) => {
         if (result !== undefined) {
             const response = {
                 status: "success",
-                message: "Create Role success!"
+                message: "Create Position success!"
             }
             res.json(response);
         } else if (result === undefined) {
             const response = {
                 status: "fail",
-                message: "Create Role fail!"
+                message: "Create Position fail!"
             }
             res.json(response);
         }
@@ -49,21 +49,21 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/", async (req, res) => {
-    var role = req.body;
-    var role_id = req.body.id;
-    console.log(role);
+    var Position = req.body;
+    var position_id = req.body.id;
+    console.log(Position);
     try {
-        var result = await role_dao.updateRole(role, role_id);
+        var result = await role_dao.updateRole(Position, position_id);
         if (result > 0) {
             const response = {
                 status: "success",
-                message: "Update Role success!"
+                message: "Update Position success!"
             }
             res.json(response);
         } else if (result === undefined) {
             const response = {
                 status: "fail",
-                message: "Update Role fail!"
+                message: "Update Position fail!"
             }
             res.json(response);
         }
@@ -75,19 +75,19 @@ router.put("/", async (req, res) => {
 
 router.put("/delete", async (req, res) => {
     const id = req.params.id;
-    const role = req.body;
+    const Position = req.body;
     try {
-        var result = await role_dao.deleteRole(role, id);
+        var result = await role_dao.deleteRole(Position, id);
         if (result > 0) {
             const response = {
                 status: "success",
-                message: "Delete Role success!"
+                message: "Delete Position success!"
             }
             res.json(response);
         } else if (result === undefined) {
             const response = {
                 status: "fail",
-                message: "Delete Role fail!"
+                message: "Delete Position fail!"
             }
             res.json(response);
         }

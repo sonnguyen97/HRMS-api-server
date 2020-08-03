@@ -1,6 +1,6 @@
 const Employee = require("../models/Employee");
 const contants = require("../contants/contants");
-const Role = require("../models/Role");
+const Position = require("../models/Position");
 const Team_Employee = require("../models/Team_Employee");
 
 module.exports = {
@@ -8,13 +8,13 @@ module.exports = {
         try {
             return await Employee.findAll(
                 {
-
+                    attributes: ['id', 'email', 'created_date', 'modified_date'],
                     include: [{
                         model: Department,
                         attributes: ['name']
                     },
                     {
-                        model: Role,
+                        model: Position,
                         attributes: ['name']
                     }],
                     where: { status_id: contants.EMPLOYEE_STATUS_ACTIVE }
@@ -37,7 +37,7 @@ module.exports = {
                     address: employee.address,
                     created_date: Date.now(),
                     status_id: contants.ACCOUNT_STATUS_ACTIVE,
-                    role_id: contants.EMPLOYEE_ROLE
+                    position_id: contants.EMPLOYEE_ROLE
                 }).then(async res => {
                     return res;
                 })
@@ -50,8 +50,9 @@ module.exports = {
         try {
             return await Employee.findOne(
                 {
+                    attributes: ['id', 'email', 'created_date', 'modified_date'],
                     include: [{
-                        model: Role,
+                        model: Position,
                         attributes: ['name']
                     }],
                     where: { id: id }
