@@ -141,14 +141,14 @@ CREATE TABLE `employee` (
   `created_date` datetime DEFAULT NULL,
   `modified_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status_id` int DEFAULT NULL,
-  `role_id` int DEFAULT NULL,
+  `position_id` int DEFAULT NULL,
   `department_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_employcee_status_idx` (`status_id`),
-  KEY `fk_employcee_role_idx` (`role_id`),
+  KEY `fk_employcee_role_idx` (`position_id`),
   KEY `fk_employcee_department_idx` (`department_id`),
   CONSTRAINT `fk_employcee_department` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`),
-  CONSTRAINT `fk_employcee_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
+  CONSTRAINT `fk_employcee_role` FOREIGN KEY (`position_id`) REFERENCES `Position` (`id`),
   CONSTRAINT `fk_employcee_status` FOREIGN KEY (`status_id`) REFERENCES `employeeoperatorstatus` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -188,13 +188,13 @@ INSERT INTO `employeeoperatorstatus` VALUES (1,'Active'),(2,'Deactive');
 UNLOCK TABLES;
 
 --
--- Table structure for table `role`
+-- Table structure for table `Position`
 --
 
-DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `Position`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `role` (
+CREATE TABLE `Position` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -202,13 +202,13 @@ CREATE TABLE `role` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `role`
+-- Dumping data for table `Position`
 --
 
-LOCK TABLES `role` WRITE;
-/*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'Admin'),(2,'Manager');
-/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+LOCK TABLES `Position` WRITE;
+/*!40000 ALTER TABLE `Position` DISABLE KEYS */;
+INSERT INTO `Position` VALUES (1,'Admin'),(2,'Manager');
+/*!40000 ALTER TABLE `Position` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

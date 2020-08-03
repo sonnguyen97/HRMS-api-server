@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../config/db-connection");
 const EmployeeOperatorStatus = require("./EmployeeOperatorStatus");
-const Role = require("./Role");
+const Position = require("./Position");
 const Department = require("./Department");
 
 const Employee = db.define(
@@ -34,6 +34,9 @@ const Employee = db.define(
         },
         modified_date: {
             type: Sequelize.DATE
+        },
+        position_id: {
+            type: Sequelize.DATE
         }
     },
     {
@@ -52,13 +55,13 @@ EmployeeOperatorStatus.hasMany(Employee, {
     foreignKey: "status_id",
     sourceKey: "id"
 });
-//role
-Employee.belongsTo(Role, {
-    foreignKey: "role_id",
+//Position
+Employee.belongsTo(Position, {
+    foreignKey: "position_id",
     sourceKey: "id"
 });
-Role.hasMany(Employee, {
-    foreignKey: "role_id",
+Position.hasMany(Employee, {
+    foreignKey: "position_id",
     sourceKey: "id"
 });
 //Department

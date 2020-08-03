@@ -8,7 +8,7 @@ const Employee = require("./../../../models/Employee");
 const Team = require("./../../../models/Team");
 const Department = require("./../../../models/Department");
 const Team_Employee = require("./../../../models/Team_Employee");
-const Role = require("./../../../models/Role");
+const Position = require("../../../models/Position");
 const { mode } = require("crypto-js");
 
 
@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
         //get employees
         var employeeResponse = await Employee.findAll({
             attributes: ['id', 'primary_email', 'personal_email',
-                'first_name', 'last_name', 'modified_date', 'address',
+                'first_name', 'last_name', 'modified_date', 'address', 'position_id',
                 'department_id', 'phone', 'status_id'],
             include: [
                 {
@@ -68,7 +68,7 @@ router.get('/', async (req, res) => {
         await departmentResponse.map(item => {
             structure.departments.push(item);
         })
-        var positionResponse = await Role.findAll();
+        var positionResponse = await Position.findAll();
         structure.positions = positionResponse;
 
 

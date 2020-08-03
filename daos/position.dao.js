@@ -1,10 +1,10 @@
-const Role = require("../models/Role");
+const Position = require("../models/Position");
 
 module.exports = {
-    createRole: async (role) => {
+    createRole: async (Position) => {
         try {
-            return await Role.create({
-                name: role.name
+            return await Position.create({
+                name: Position.name
             }).then(async res => {
                 return res;
             })
@@ -12,10 +12,10 @@ module.exports = {
             console.log(err);
         }
     },
-    updateRole: async (role, role_id) => {
+    updateRole: async (Position, position_id) => {
         try {
-            return await Role.update(role, {
-                where: { id: role_id }
+            return await Position.update(Position, {
+                where: { id: position_id }
             }).then(async res => {
                 return res;
             })
@@ -23,9 +23,9 @@ module.exports = {
             console.log(err);
         }
     },
-    deleteRole: async (role, id) => {
+    deleteRole: async (Position, id) => {
         try {
-            return await Role.update(role, {
+            return await Position.update(Position, {
                 where: { id: id }
             }).then(async res => {
                 return res;
@@ -36,7 +36,7 @@ module.exports = {
     },
     findAllRole: async () => {
         try {
-            return await Role.findAll({
+            return await Position.findAll({
                 attributes: ['id', 'name']
             }).then(async res => {
                 return res;
@@ -47,7 +47,7 @@ module.exports = {
     },
     findByPk: async (id) => {
         try {
-            return await Role.findAll({
+            return await Position.findAll({
                 attributes: ['id', 'name'],
                 where: { id: id }
             })

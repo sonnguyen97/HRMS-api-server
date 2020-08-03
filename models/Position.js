@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../config/db-connection");
 
-const Role = db.define(
+const Position = db.define(
     "position",
     {
         id: {
@@ -18,4 +18,4 @@ const Role = db.define(
     }
 );
 
-module.exports = Role;
+module.exports = Position;
