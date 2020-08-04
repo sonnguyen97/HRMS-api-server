@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
         var employeeResponse = await Employee.findAll({
             attributes: ['id', 'primary_email', 'personal_email',
                 'first_name', 'last_name', 'modified_date', 'address', 'position_id',
-                'department_id', 'phone', 'status_id'],
+                'department_id', 'phone', 'status_id', 'vacation_start_date', 'vacation_end_date'],
             include: [
                 {
                     model: Department,
