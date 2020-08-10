@@ -2,6 +2,7 @@ const Employee = require("../models/Employee");
 const contants = require("../contants/contants");
 const Position = require("../models/Position");
 const Team_Employee = require("../models/Team_Employee");
+const Vacation_Employee = require("../models/Vacation_Employee");
 
 module.exports = {
     getAllEmployeee: async () => {
@@ -13,6 +14,10 @@ module.exports = {
                         model: Department,
                         attributes: ['name']
                     },
+                    {
+                        model: Vacation_Employee,
+                        attributes: ['id','start_date','end_date']
+                    }
                     {
                         model: Position,
                         attributes: ['name']
