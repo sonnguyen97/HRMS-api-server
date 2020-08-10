@@ -68,7 +68,9 @@ router.get('/', async (req, res) => {
         await departmentResponse.map(item => {
             structure.departments.push(item);
         })
-        var positionResponse = await Position.findAll();
+        var positionResponse = await Position.findAll({
+            order: [['name', 'ASC']]
+        });
         structure.positions = positionResponse;
 
 
