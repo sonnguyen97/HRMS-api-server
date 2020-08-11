@@ -45,7 +45,7 @@ module.exports = {
     findAllTeam: async () => {
         try {
             return await Team.findAll({
-                attributes: ['id', 'name', 'description', 'create_date', 'modified_date', 'email'],
+                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'email'],
                 where: { status_id: 1 }
             }).then(async res => {
                 return res;
