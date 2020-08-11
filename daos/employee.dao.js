@@ -3,21 +3,18 @@ const contants = require("../contants/contants");
 const Position = require("../models/Position");
 const Team_Employee = require("../models/Team_Employee");
 const Vacation_Employee = require("../models/Vacation_Employee");
+const Department = require("../models/Department");
 
 module.exports = {
     getAllEmployeee: async () => {
         try {
             return await Employee.findAll(
                 {
-                    attributes: ['id', 'email', 'created_date', 'modified_date'],
+                    attributes: ['id', 'primary_email','personal_email','phone', 'created_date', 'modified_date'],
                     include: [{
                         model: Department,
                         attributes: ['name']
                     },
-                    {
-                        model: Vacation_Employee,
-                        attributes: ['id','start_date','end_date']
-                    }
                     {
                         model: Position,
                         attributes: ['name']
@@ -55,11 +52,15 @@ module.exports = {
         try {
             return await Employee.findOne(
                 {
-                    attributes: ['id', 'email', 'created_date', 'modified_date'],
+                    attributes: ['id','primary_email','personal_email','phone','address', 'first_name','last_name', 'created_date', 'modified_date'],
                     include: [{
                         model: Position,
                         attributes: ['name']
-                    }],
+                    },
+                    {
+                        model: Vacation_Employee,
+                        attributes: ['id','start_date','end_date']
+                    },],
                     where: { id: id }
                 },
                 { where: { status_id: contants.EMPLOYEE_STATUS_ACTIVE } }
