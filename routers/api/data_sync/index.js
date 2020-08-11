@@ -9,7 +9,10 @@ const Team = require("./../../../models/Team");
 const Department = require("./../../../models/Department");
 const Team_Employee = require("./../../../models/Team_Employee");
 const Position = require("../../../models/Position");
+const Vacation = require("../../../models/Vacation");
 const { mode } = require("crypto-js");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 
 router.get('/', async (req, res) => {
@@ -38,9 +41,32 @@ router.get('/', async (req, res) => {
                 ['primary_email', 'ASC']
             ]
         });
+
+        var reponse = [];
+        var today = new Date();
+        var vacation = await Vacation.findAll({
+            where: {
+                [Op.or]: [{start_date: { [Op.eq]: today.toISOString().substring(0, 10) }}, {start_date: { [Op.gt]: today.toISOString().substring(0, 10) }}]
+                
+            },
+
+            order: [['start_date', 'ASC']],
+            limit: 1
+        });
+        console.log(vacation);
+        if (vacation.length > 0) {
+            for (let i = 0; i < employeeResponse.length; i++) {
+                for (let j = 0; j < vacation.length; j++) {
+                    if (employeeResponse[i].id === vacation[j].employee_id) {
+                        employeeResponse[i].vacation_start_date = vacation[j].start_date;
+                        employeeResponse[i].vacation_end_date = vacation[j].end_date;
+                    }
+                }
+            }
+        }
         console.log("----Get all employee from HRMS---");
 
-        structure.employees = [...structure.employees, ...employeeResponse];
+        structure.employees = employeeResponse;
 
         var teamResponse = await Team.findAll({
             include: [
