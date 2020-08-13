@@ -62,7 +62,7 @@ module.exports = {
                         attributes: ['id','start_date','end_date']
                     },],
                     where: { id: id }
-                },
+                }, 
                 { where: { status_id: contants.EMPLOYEE_STATUS_ACTIVE } }
             ).then(async res => {
                 return res;

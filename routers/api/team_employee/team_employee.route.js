@@ -3,6 +3,7 @@ const router = express.Router();
 const Team_Employee = require("../../../models/Team_Employee");
 const team_employee_dao = require("../../../daos/team_employee.dao");
 const Employee = require("../../../models/Employee");
+const team_dao = require("../../../daos/team.dao");
 
 router.get("/", async (req, res) => {
     try {
@@ -18,15 +19,7 @@ router.get("/:id", async (req, res) => {
     const teamId = req.params.id;
     try {
         // var listAccount = account_team_dao.getAllAccountByTeamId(teamId);
-        var listAccount = Team_Employee.findAll({
-            include:[{
-                model: Employee,
-                as : 'employee',
-                attributes: [''],
-            }], 
-            where: {team_id: teamId}
-        })
-        console.log(listAccount);
+        var listAccount = team_dao.findByPk(teamId);
         res.json(listAccount);
     } catch (err) {
         console.log(err);

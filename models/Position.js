@@ -18,4 +18,6 @@ const Position = db.define(
     }
 );
 
+
+
 module.exports = Position;

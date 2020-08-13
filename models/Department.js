@@ -23,6 +23,9 @@ const Department = db.define(
         },
         orgunits_path: {
             type:Sequelize.STRING
+        },
+        email : {
+            type: Sequelize.STRING
         }
     },
     {

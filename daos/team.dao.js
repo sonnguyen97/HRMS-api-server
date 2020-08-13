@@ -1,6 +1,7 @@
 const Team = require("../models/Team");
 const Employee = require("../models/Employee");
 const Team_Employee = require("../models/Team_Employee");
+const Position = require("../models/Position");
 module.exports = {
     createTeam: async (team) => {
         try {
@@ -65,24 +66,54 @@ module.exports = {
                 suspended: '',
                 members: []
             }
-            var team = await Team.findOne({ where: { id: id } });
-            return await Team_Employee.findAll({
-                attributes: ['employee_id', 'team_id', 'modified_date'],
-                where: { team_id: id },
-                include: [Employee]
+            return await Team.findOne({
+                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'email','status_id'],                
+                include: [
+                    {
+                        attributes: ['employee_id', 'modified_date'],
+                        model: Team_Employee,
+                        include: [
+                            {
+                                attributes: ['first_name','last_name','primary_email','position_id'],
+                                model: Employee,
+                                include: [
+                                    {
+                                        model: Position,
+                                        attributes: ['name'],
+                                    }
+                                ],
+                            }
+                        ],
+                        as: 'members'
+                    }],
+                order: [['email', "ASC"]],
+                where: { id: id }
+                
             }).then(async res => {
-                response.id = team.id;
-                response.groupName = team.name;
-                response.email = team.email;
-                response.description = team.description;
-                if (team.status_id == 0) {
-                    response.suspended = false;
+                response.id = res.id;
+                response.groupName = res.name;
+                response.email = res.email;
+                response.description = res.description;
+                if (res.status_id == 0) {
+                    response.status_id = false;
                 } else {
-                    response.suspended = true;
+                    response.status_id = true;
                 }
-                res.map(item => {
-                    response.members.push(item.dataValues.employee);
-                })
+                console.log(res.members[0].employee.position);
+                for(var i = 0 ;i < res.members.length; i++){
+                    let item = {
+                        primary_email: String,
+                        emp_name: String,
+                        position_id : Number,
+                        position_name: String
+                    };
+                    var el = res.members[i];
+                    item.primary_email = el.employee.primary_email;
+                    item.emp_name = el.employee.last_name + el.employee.first_name;
+                    item.position_id = el.employee.position_id;
+                    item.position_name = el.employee.position.name;
+                    response.members.push(item);
+                }   
                 return response;
             })
 

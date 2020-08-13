@@ -18,6 +18,9 @@ const Team = db.define(
         created_date: {
             type: Sequelize.DATE
         },
+        status_id:{
+            type: Sequelize.INTEGER
+        },
         modified_date: {
             type: Sequelize.DATE
         },
