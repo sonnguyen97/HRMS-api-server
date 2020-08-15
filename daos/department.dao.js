@@ -54,10 +54,9 @@ module.exports = {
             return await Department.findAll({
                 attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path','email'],
                 where: { id: id, status_id: 1 }
+            }).then(async res => {
+                return res;
             })
-                .then(async res => {
-                    return res;
-                })
         } catch (err) {
             console.log(err);
         }

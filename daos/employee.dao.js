@@ -39,7 +39,7 @@ module.exports = {
                     address: employee.address,
                     created_date: Date.now(),
                     status_id: contants.ACCOUNT_STATUS_ACTIVE,
-                    position_id: contants.EMPLOYEE_ROLE
+                    position_id: employee.position_id
                 }).then(async res => {
                     return res;
                 })

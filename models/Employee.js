@@ -36,7 +36,7 @@ const Employee = db.define(
             type: Sequelize.DATE
         },
         position_id: {
-            type: Sequelize.DATE
+            type: Sequelize.INTEGER
         },
         vacation_start_date: {
             type: Sequelize.DATE

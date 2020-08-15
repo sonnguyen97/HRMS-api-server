@@ -11,6 +11,7 @@ router.use("/accountOpetatorStatus", require("./api/account_operator_status/acco
 router.use("/teamEmployee", require("./api/team_employee/team_employee.route"));
 router.use("/employees", require("./api/employee/employee.route"));
 router.use("/vacation", require("./api/vacation/vacation.route"));
+router.use("/positions", require("./api/position/position.route"));
 router.use("/departmentEmployee", require("./api/department_employee/department_employee.route"));
 // api data for synchronize
 router.use("/data-hrms", require("./api/data_sync/index"));
