@@ -39,7 +39,8 @@ router.get('/', async (req, res) => {
             ],
             order: [
                 ['primary_email', 'ASC']
-            ]
+            ],
+            where: { status_id: 1 }
         });
 
         var reponse = [];
