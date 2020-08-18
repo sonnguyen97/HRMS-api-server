@@ -99,7 +99,6 @@ module.exports = {
                 } else {
                     response.status_id = true;
                 }
-                console.log(res.members[0].employee.position);
                 for(var i = 0 ;i < res.members.length; i++){
                     let item = {
                         primary_email: String,
