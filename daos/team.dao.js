@@ -94,11 +94,7 @@ module.exports = {
                 response.groupName = res.name;
                 response.email = res.email;
                 response.description = res.description;
-                if (res.status_id == 0) {
-                    response.status_id = false;
-                } else {
-                    response.status_id = true;
-                }
+                response.status_id = res.status_id;
                 for(var i = 0 ;i < res.members.length; i++){
                     let item = {
                         primary_email: String,
