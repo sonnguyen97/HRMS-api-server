@@ -82,6 +82,10 @@ router.get('/', async (req, res) => {
                     ],
                     as: 'members'
                 }],
+
+                where: {
+                    status_id: 1
+                },
             order: [['email', "ASC"]]
         }
         );
@@ -90,6 +94,9 @@ router.get('/', async (req, res) => {
 
         // get derpartments
         var departmentResponse = await Department.findAll({
+            where: {
+                status_id: 1
+            },
             order: [['name', "ASC"]]
         });
         await departmentResponse.map(item => {
