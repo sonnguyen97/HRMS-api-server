@@ -10,7 +10,7 @@ module.exports = {
         try {
             return await Employee.findAll(
                 {
-                    attributes: ['id', 'primary_email','personal_email','phone', 'created_date', 'modified_date'],
+                    attributes: ['id', 'primary_email','personal_email','phone', 'first_name', 'last_name', 'created_date', 'modified_date'],
                     include: [{
                         model: Department,
                         attributes: ['name']
@@ -38,7 +38,7 @@ module.exports = {
                     last_name: employee.last_name,
                     address: employee.address,
                     created_date: Date.now(),
-                    department_id : employee.departmet_id,
+                    department_id : employee.department_id,
                     status_id: contants.ACCOUNT_STATUS_ACTIVE,
                     position_id: employee.position_id
                 }).then(async res => {
@@ -61,7 +61,12 @@ module.exports = {
                     {
                         model: Vacation_Employee,
                         attributes: ['id','start_date','end_date']
-                    },],
+                    },
+                    {
+                        model: Department,
+                        attributes: ['id','name']
+                    },
+                ],
                     where: { id: id }
                 }, 
                 { where: { status_id: contants.EMPLOYEE_STATUS_ACTIVE } }
