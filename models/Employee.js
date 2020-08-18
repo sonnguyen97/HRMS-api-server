@@ -35,6 +35,9 @@ const Employee = db.define(
         modified_date: {
             type: Sequelize.DATE
         },
+        department_id:{
+            type: Sequelize.INTEGER
+        },
         position_id: {
             type: Sequelize.INTEGER
         },

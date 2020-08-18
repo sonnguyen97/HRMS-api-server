@@ -38,6 +38,7 @@ module.exports = {
                     last_name: employee.last_name,
                     address: employee.address,
                     created_date: Date.now(),
+                    department_id : employee.departmet_id,
                     status_id: contants.ACCOUNT_STATUS_ACTIVE,
                     position_id: employee.position_id
                 }).then(async res => {
