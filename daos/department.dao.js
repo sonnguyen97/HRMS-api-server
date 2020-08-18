@@ -5,6 +5,7 @@ module.exports = {
         try {
             return await Department.create({
                 name: department.name,
+                email : department.email,
                 description: department.description,
                 created_date: Date.now(),
                 status_id: department.status_id

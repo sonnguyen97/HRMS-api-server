@@ -10,7 +10,7 @@ module.exports = {
         try {
             return await Employee.findAll(
                 {
-                    attributes: ['id', 'primary_email','personal_email','phone', 'created_date', 'modified_date'],
+                    attributes: ['id','first_name','last_name', 'primary_email','personal_email','phone', 'created_date', 'modified_date'],
                     include: [{
                         model: Department,
                         attributes: ['name']
@@ -95,6 +95,9 @@ module.exports = {
             if (checkEmpExisted != 0) {
                 return await Employee.update(
                     {
+                        first_name : employee.first_name,
+                        last_name: employee.last_name,
+                        primary_email : employee.primary_email,
                         personal_email: employee.personal_email,
                         phone: employee.phone,
                         address: employee.address
