@@ -46,6 +46,9 @@ const Employee = db.define(
         },
         vacation_end_date: {
             type: Sequelize.DATE
+        },
+        status_id:{
+            type: Sequelize.INTEGER
         }
     },
     {

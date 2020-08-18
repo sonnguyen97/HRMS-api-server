@@ -53,7 +53,7 @@ module.exports = {
         try {
             return await Employee.findOne(
                 {
-                    attributes: ['id','primary_email','personal_email','phone','address', 'first_name','last_name', 'created_date', 'modified_date'],
+                    attributes: ['id','primary_email','personal_email','phone','address', 'first_name','last_name', 'created_date', 'modified_date','status_id'],
                     include: [{
                         model: Position,
                         attributes: ['name']
@@ -105,7 +105,8 @@ module.exports = {
                         primary_email : employee.primary_email,
                         personal_email: employee.personal_email,
                         phone: employee.phone,
-                        address: employee.address
+                        address: employee.address,
+                        status_id : employee.status_id
                     },
                     { where: { id: employee.id } },
 
