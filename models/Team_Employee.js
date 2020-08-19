@@ -25,10 +25,12 @@ const Team_Employee = db.define(
 );
 
 Team_Employee.belongsTo(Employee, {
+
     foreignKey: "employee_id",
     sourceKey: "id"
 });
 Employee.hasMany(Team_Employee, {
+    as: 'teams',
     foreignKey: "employee_id",
     sourceKey: "id"
 });

@@ -35,6 +35,14 @@ router.get('/', async (req, res) => {
                     where: {
                         status_id: 1
                     }
+                },
+                {   
+                    model: Team_Employee,
+                    as: 'teams',
+                    attributes: ['team_id'],
+                    order: [
+                        ['team_id', 'ASC']
+                    ],
                 }
             ],
             order: [
