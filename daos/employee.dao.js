@@ -4,7 +4,8 @@ const Position = require("../models/Position");
 const Team_Employee = require("../models/Team_Employee");
 const Vacation_Employee = require("../models/Vacation_Employee");
 const Department = require("../models/Department");
-
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 module.exports = {
     getAllEmployeee: async () => {
         try {
@@ -51,6 +52,7 @@ module.exports = {
     },
     getEmployeeById: async (id) => {
         try {
+            var today = new Date();
             return await Employee.findOne(
                 {
                     attributes: ['id','primary_email','personal_email','phone','address', 'first_name','last_name', 'created_date', 'modified_date','status_id'],
@@ -60,14 +62,16 @@ module.exports = {
                     },
                     {
                         model: Vacation_Employee,
-                        attributes: ['id','start_date','end_date']
+                        attributes: ['id','start_date','end_date'],
+                        // where : {start_date : {[Op.gte]: today} },
+                        order: [['start_date,', "DESC"]]
                     },
                     {
                         model: Department,
                         attributes: ['id','name']
                     },
                 ],
-                    where: { id: id }
+                    where: { id: id },
                 }, 
                 { where: { status_id: contants.EMPLOYEE_STATUS_ACTIVE } }
             ).then(async res => {
