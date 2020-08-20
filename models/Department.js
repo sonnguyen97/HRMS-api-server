@@ -26,6 +26,9 @@ const Department = db.define(
         },
         email : {
             type: Sequelize.STRING
+        },
+        status_id:{
+            type: Sequelize.INTEGER
         }
     },
     {

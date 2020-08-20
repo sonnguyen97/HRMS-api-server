@@ -41,7 +41,7 @@ module.exports = {
     findAllDepartment: async () => {
         try {
             return await Department.findAll({
-                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path','email'],
+                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path','email','status_id'],
                 where: { status_id: 1 }
             }).then(async res => {
                 return res;
@@ -53,8 +53,8 @@ module.exports = {
     findByPk: async (id) => {
         try {
             return await Department.findAll({
-                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path','email'],
-                where: { id: id, status_id: 1 }
+                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path','email','status_id'],
+                where: { id: id}
             }).then(async res => {
                 return res;
             })
