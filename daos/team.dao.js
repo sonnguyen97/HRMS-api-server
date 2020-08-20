@@ -74,7 +74,7 @@ module.exports = {
                         model: Team_Employee,
                         include: [
                             {
-                                attributes: ['first_name','last_name','primary_email','position_id'],
+                                attributes: ['id','first_name','last_name','primary_email','position_id'],
                                 model: Employee,
                                 include: [
                                     {
@@ -97,12 +97,14 @@ module.exports = {
                 response.status_id = res.status_id;
                 for(var i = 0 ;i < res.members.length; i++){
                     let item = {
+                        id : Number,
                         primary_email: String,
                         emp_name: String,
                         position_id : Number,
                         position_name: String
                     };
                     var el = res.members[i];
+                    item.id = el.employee.id;
                     item.primary_email = el.employee.primary_email;
                     item.emp_name = el.employee.last_name + el.employee.first_name;
                     item.position_id = el.employee.position_id;
@@ -116,5 +118,21 @@ module.exports = {
             console.log(err);
         }
     },
+
+    removeEmpOfTeam : async(delEmp)=>{
+        try {
+            return await Team_Employee.destroy({
+                where: { 
+                    employee_id : delEmp.empId,
+                    team_id : delEmp.teamId
+                }
+            }).then(async res => {
+                return res;
+            })
+            
+        } catch (error) {
+            console.log(err);
+        }
+    }
 };
 
