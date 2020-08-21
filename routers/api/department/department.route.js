@@ -24,6 +24,17 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+router.get("empdep/:id", async (req, res) => {
+    const id = req.params.id;
+    try {
+        const empList = await department_dao.getAllEmpByDep(id);
+        res.json(empList);
+    } catch (err) {
+        console.log(err.message);
+        res.send("Server error");
+    }
+});
+
 router.post("/", async (req, res) => {
     var newDepartment = req.body;
     console.log(newDepartment);
