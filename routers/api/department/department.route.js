@@ -24,7 +24,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-router.get("empdep/:id", async (req, res) => {
+router.get("/empdep/:id", async (req, res) => {
     const id = req.params.id;
     try {
         const empList = await department_dao.getAllEmpByDep(id);
