@@ -19,8 +19,7 @@ module.exports = {
                     {
                         model: Position,
                         attributes: ['name']
-                    }],
-                    where: { status_id: contants.EMPLOYEE_STATUS_ACTIVE }
+                    }]
                 }
             )
         } catch (err) {

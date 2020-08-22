@@ -42,7 +42,6 @@ module.exports = {
         try {
             return await Department.findAll({
                 attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path','email','status_id'],
-                where: { status_id: 1 }
             }).then(async res => {
                 return res;
             })
