@@ -105,7 +105,7 @@ module.exports = {
                     var el = res.members[i];
                     item.id = el.employee.id;
                     item.primary_email = el.employee.primary_email;
-                    item.emp_name = el.employee.last_name + el.employee.first_name;
+                    item.emp_name = el.employee.first_name +' '+ el.employee.last_name;
                     item.position_id = el.employee.position_id;
                     item.position_name = el.employee.position.name;
                     response.members.push(item);
