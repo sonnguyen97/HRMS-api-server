@@ -10,7 +10,6 @@ const Department = require("./../../../models/Department");
 const Team_Employee = require("./../../../models/Team_Employee");
 const Position = require("../../../models/Position");
 const Vacation = require("../../../models/Vacation");
-const { mode } = require("crypto-js");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
@@ -32,11 +31,8 @@ router.get('/', async (req, res) => {
                 {
                     model: Department,
                     attributes: ['id', 'name'],
-                    where: {
-                        status_id: 1
-                    }
                 },
-                {   
+                {
                     model: Team_Employee,
                     as: 'teams',
                     attributes: ['team_id'],
@@ -51,12 +47,11 @@ router.get('/', async (req, res) => {
             where: { status_id: 1 }
         });
 
-        var reponse = [];
         var today = new Date();
         var vacation = await Vacation.findAll({
             where: {
-                [Op.or]: [{start_date: { [Op.eq]: today.toISOString().substring(0, 10) }}, {start_date: { [Op.gt]: today.toISOString().substring(0, 10) }}]
-                
+                [Op.or]: [{ start_date: { [Op.eq]: today.toISOString().substring(0, 10) } }, { start_date: { [Op.gt]: today.toISOString().substring(0, 10) } }]
+
             },
 
             order: [['start_date', 'ASC']],
@@ -85,15 +80,17 @@ router.get('/', async (req, res) => {
                     include: [
                         {
                             attributes: ['primary_email'],
-                            model: Employee
+                            model: Employee,
+                            where: { status_id: 1 }
+
                         }
                     ],
                     as: 'members'
                 }],
 
-                where: {
-                    status_id: 1
-                },
+            where: {
+                status_id: 1
+            },
             order: [['email', "ASC"]]
         }
         );
