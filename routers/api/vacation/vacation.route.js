@@ -42,7 +42,7 @@ router.put("/update", async(req,res)=> {
 })
 
 router.put("/delete", async(req,res)=> {
-    var id = req.params.id;
+    var id = req.body.id;
     try {
         if(id != null && id != undefined){
             await vacation_dao.deleteVacation(id);

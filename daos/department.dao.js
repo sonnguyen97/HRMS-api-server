@@ -1,5 +1,6 @@
 const Department = require("../models/Department");
-
+const Employee = require("../models/Employee");
+const contants = require("../contants/contants");
 module.exports = {
     createDepartment: async (department) => {
         try {
@@ -41,8 +42,8 @@ module.exports = {
     findAllDepartment: async () => {
         try {
             return await Department.findAll({
-                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path','email'],
-                where: { status_id: 1 }
+                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path','email','status_id'],
+                where: { status_id: contants.EMPLOYEE_STATUS_ACTIVE }
             }).then(async res => {
                 return res;
             })
@@ -53,8 +54,8 @@ module.exports = {
     findByPk: async (id) => {
         try {
             return await Department.findAll({
-                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path','email'],
-                where: { id: id, status_id: 1 }
+                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path','email','status_id'],
+                where: { id: id , status_id: contants.EMPLOYEE_STATUS_ACTIVE}
             }).then(async res => {
                 return res;
             })
@@ -62,4 +63,17 @@ module.exports = {
             console.log(err);
         }
     },
+
+    getAllEmpByDep: async (id)=>{
+        try {
+            return await Employee.findAll({
+                attributes: ['id', 'primary_email', 'first_name', 'last_name'],
+                where: { department_id: id, status_id: contants.EMPLOYEE_STATUS_ACTIVE }
+            }).then(async res => {
+                return res;
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    }
 };
