@@ -51,13 +51,10 @@ router.get('/', async (req, res) => {
         var vacation = await Vacation.findAll({
             where: {
                 [Op.or]: [{ start_date: { [Op.eq]: today.toISOString().substring(0, 10) } }, { start_date: { [Op.gt]: today.toISOString().substring(0, 10) } }]
-
             },
-
-            order: [['start_date', 'ASC']],
-            limit: 1
+            order: [['start_date', 'ASC']]
         });
-        console.log(vacation);
+        console.log(today.toISOString().substring(0, 10) );
         if (vacation.length > 0) {
             for (let i = 0; i < employeeResponse.length; i++) {
                 for (let j = 0; j < vacation.length; j++) {
