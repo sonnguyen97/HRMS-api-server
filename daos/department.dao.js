@@ -19,11 +19,27 @@ module.exports = {
     },
     updateDepartment: async (department, department_id) => {
         try {
-            return await Department.update(department, {
-                where: { id: department_id }
-            }).then(async res => {
-                return res;
-            })
+            if(department.status_id === 2){
+                var employee = await Employee.findAll({
+                    attributes: ['id'],
+                    where : {department_id : department_id}
+                });
+                if(employee.length === 0){
+                    return await Department.update(department, {
+                        where: { id: department_id }
+                    }).then(async res => {
+                        return {code : 200, status :"Department has been deleted!"};
+                    })
+                }else{
+                    return {code : 1, status :"Department has employee!"}
+                }
+            }else{
+                return await Department.update(department, {
+                    where: { id: department_id }
+                }).then(async res => {
+                    return {code : 200, status :"Department has been deleted!"};
+                })
+            }
         } catch (err) {
             console.log(err);
         }

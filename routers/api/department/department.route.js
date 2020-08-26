@@ -65,21 +65,7 @@ router.put("/", async (req, res) => {
     console.log(department);
     try {
         var result = await department_dao.updateDepartment(department, department_id);
-        if (result > 0) {
-            const response = {
-                status: "success",
-                message: "Update Department success!"
-            }
-            res.json(response);
-        } else if (result === undefined) {
-            const response = {
-                status: "fail",
-                message: "Update Department fail!"
-            }
-            res.json(response);
-        } else { 
-            res.json({"status": "No Changed"});
-        }
+        res.json(result);
     } catch (err) {
         console.log(err.message);
         res.send("Server error");
@@ -91,18 +77,8 @@ router.put("/delete", async (req, res) => {
     const department = req.body;
     try {
         var result = await department_dao.deleteDepartment(department, id);
-        if (result > 0) {
-            const response = {
-                status: "success",
-                message: "Delete Department success!"
-            }
-            res.json(response);
-        } else if (result === undefined) {
-            const response = {
-                status: "fail",
-                message: "Delete Department fail!"
-            }
-            res.json(response);
+        if (result != null) {
+            res.json(results);
         }
     } catch (err) {
         console.log(err.message);
