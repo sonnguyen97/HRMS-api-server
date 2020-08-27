@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
                     attributes: ['team_id'],
                     order: [
                         ['team_id', 'ASC']
-                    ],
+                    ]
                 }
             ],
             order: [
@@ -54,7 +54,7 @@ router.get('/', async (req, res) => {
             },
             order: [['start_date', 'ASC']]
         });
-        console.log(today.toISOString().substring(0, 10) );
+        console.log(today.toISOString().substring(0, 10));
         if (vacation.length > 0) {
             for (let i = 0; i < employeeResponse.length; i++) {
                 for (let j = 0; j < vacation.length; j++) {
@@ -74,17 +74,17 @@ router.get('/', async (req, res) => {
                 {
                     attributes: ['employee_id', 'modified_date'],
                     model: Team_Employee,
+                    as: 'members',
                     include: [
                         {
-                            attributes: ['primary_email'],
+                            attributes: ['primary_email', ['id', 'employee_id']],
                             model: Employee,
-                            where: { status_id: 1 }
+                            order: [['id', 'ASC']],
+                            // where: { status_id: 1 }
 
                         }
-                    ],
-                    as: 'members'
+                    ]
                 }],
-
             where: {
                 status_id: 1
             },
