@@ -29,16 +29,16 @@ router.post("/", async (req, res) => {
     console.log(newTeam);
     try {
         var result = await team_dao.createTeam(newTeam);
-        if (result !== undefined) {
+        if (result.code == 400) {
             const response = {
-                status: "success",
-                message: "Create Team success!"
+                status: result.code,
+                message: result.status
             }
             res.json(response);
-        } else if (result === undefined) {
+        } else  {
             const response = {
-                status: "fail",
-                message: "Create Team fail!"
+                status: 200,
+                message: "Team is created!"
             }
             res.json(response);
         }

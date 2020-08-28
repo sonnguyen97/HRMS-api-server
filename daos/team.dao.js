@@ -5,11 +5,20 @@ const Position = require("../models/Position");
 module.exports = {
     createTeam: async (team) => {
         try {
+            var checTeamEmailExisted = await Team.count({ where: { email: team.email } });
+            if(checTeamEmailExisted){
+                return {code : 400, status :"Email is existed!"};
+            }
+            var checTeamNameExisted = await Team.count({ where: { name: team.name } });
+            if(checTeamNameExisted){
+                return {code : 400, status :"Name is existed!"};
+            }
             return await Team.create({
                 name: team.name,
                 created_date: Date.now(),
                 status_id: team.status_id,
-                email: team.email
+                email: team.email,
+                description: team.description
             }).then(async res => {
                 return res;
             })
@@ -46,7 +55,7 @@ module.exports = {
     findAllTeam: async () => {
         try {
             return await Team.findAll({
-                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'email'],
+                attributes: ['id', 'name', 'description', 'created_date','status_id', 'modified_date', 'email'],
             }).then(async res => {
                 return res;
             })

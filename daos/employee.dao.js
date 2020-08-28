@@ -42,9 +42,9 @@ module.exports = {
                     status_id: contants.ACCOUNT_STATUS_ACTIVE,
                     position_id: employee.position_id
                 }).then(async res => {
-                    return res;
+                    return {code : 200, status :"Employee is created!"};
                 })
-            } else { return false; }
+            } else{ return {code : 400, status :"Employee is existed!"}}
         } catch (err) {
             console.log(err);
         }

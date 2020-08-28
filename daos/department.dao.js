@@ -4,6 +4,14 @@ const contants = require("../contants/contants");
 module.exports = {
     createDepartment: async (department) => {
         try {
+            var checDepEmailExisted = await Department.count({ where: { email: department.email } });
+            if(checDepEmailExisted){
+                return {code : 400, status :"Email is existed!"};
+            }
+            var checDepNameExisted = await Department.count({ where: { name: department.name } });
+            if(checDepNameExisted){
+                return {code : 400, status :"Name is existed!"};
+            }
             return await Department.create({
                 name: department.name,
                 email : department.email,

@@ -40,16 +40,16 @@ router.post("/", async (req, res) => {
     console.log(newDepartment);
     try {
         var result = await department_dao.createDepartment(newDepartment);
-        if (result !== undefined) {
+        if (result.code == 400) {
             const response = {
-                status: "success",
-                message: "Create Department success!"
+                status: result.code,
+                message: result.status
             }
             res.json(response);
-        } else if (result === undefined) {
+        } else  {
             const response = {
-                status: "fail",
-                message: "Create Department fail!"
+                status: 200,
+                message: "Create Department success!"
             }
             res.json(response);
         }
