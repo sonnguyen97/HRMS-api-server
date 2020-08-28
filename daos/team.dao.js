@@ -2,16 +2,25 @@ const Team = require("../models/Team");
 const Employee = require("../models/Employee");
 const Team_Employee = require("../models/Team_Employee");
 const Position = require("../models/Position");
+const Department = require("../models/Department");
 module.exports = {
     createTeam: async (team) => {
         try {
-            var checTeamEmailExisted = await Team.count({ where: { email: team.email } });
-            if(checTeamEmailExisted){
+            var checkTeamEmailExisted = await Team.count({ where: { email: team.email } });
+            if(checkTeamEmailExisted){
                 return {code : 400, status :"Email is existed!"};
             }
-            var checTeamNameExisted = await Team.count({ where: { name: team.name } });
-            if(checTeamNameExisted){
+            var checkTeamNameExisted = await Team.count({ where: { name: team.name } });
+            if(checkTeamNameExisted){
                 return {code : 400, status :"Name is existed!"};
+            }
+            var checkTeamEmailExistedDep = await Department.count({ where: { email: team.email } });
+            if(checkTeamEmailExistedDep){
+                return {code : 400, status :"Email is duplicate with department!"};
+            }
+            var checkTeamEmailExistedEmp = await Employee.count({ where: { primary_email: team.email } });
+            if(checkTeamEmailExistedEmp){
+                return {code : 400, status :"Email is duplicate with employee!"};
             }
             return await Team.create({
                 name: team.name,
@@ -56,6 +65,7 @@ module.exports = {
         try {
             return await Team.findAll({
                 attributes: ['id', 'name', 'description', 'created_date','status_id', 'modified_date', 'email'],
+                where : {status_id : 1}
             }).then(async res => {
                 return res;
             })

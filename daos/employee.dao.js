@@ -5,6 +5,7 @@ const Team_Employee = require("../models/Team_Employee");
 const Vacation_Employee = require("../models/Vacation_Employee");
 const Department = require("../models/Department");
 const Sequelize = require("sequelize");
+const Team = require("../models/Team");
 const Op = Sequelize.Op;
 module.exports = {
     getAllEmployeee: async () => {
@@ -28,23 +29,32 @@ module.exports = {
     },
     createEmployee: async (employee) => {
         try {
-            var checEmpExisted = await Employee.count({ where: { primary_email: employee.primary_email } });
-            if (checEmpExisted == 0) {
-                return await Employee.create({
-                    primary_email: employee.primary_email,
-                    personal_email: employee.personal_email,
-                    phone: employee.phone,
-                    first_name: employee.first_name,
-                    last_name: employee.last_name,
-                    address: employee.address,
-                    created_date: Date.now(),
-                    department_id : employee.department_id,
-                    status_id: contants.ACCOUNT_STATUS_ACTIVE,
-                    position_id: employee.position_id
-                }).then(async res => {
-                    return {code : 200, status :"Employee is created!"};
-                })
-            } else{ return {code : 400, status :"Employee is existed!"}}
+            var checkEmpExisted = await Employee.count({ where: { primary_email: employee.primary_email } });
+            if(checkEmpExisted){
+                return {code : 400, status :"Employee is existed!"};
+            }
+            var checkEmpExistedTeam = await Team.count({ where: { email: employee.primary_email } });
+            if(checkEmpExistedTeam){
+                return {code : 400, status :"Email is duplicate with team!"};
+            }
+            var checkEmpExistedDep = await Department.count({ where: { email: employee.primary_email } });
+            if(checkEmpExistedDep){
+                return {code : 400, status :"Email is duplicate with department!"};
+            }
+            return await Employee.create({
+                primary_email: employee.primary_email,
+                personal_email: employee.personal_email,
+                phone: employee.phone,
+                first_name: employee.first_name,
+                last_name: employee.last_name,
+                address: employee.address,
+                created_date: Date.now(),
+                department_id : employee.department_id,
+                status_id: contants.ACCOUNT_STATUS_ACTIVE,
+                position_id: employee.position_id
+            }).then(async res => {
+                return {code : 200, status :"Employee is created!"};
+            });
         } catch (err) {
             console.log(err);
         }

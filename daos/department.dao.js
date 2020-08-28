@@ -1,6 +1,7 @@
 const Department = require("../models/Department");
 const Employee = require("../models/Employee");
 const contants = require("../contants/contants");
+const Team = require("../models/Team");
 module.exports = {
     createDepartment: async (department) => {
         try {
@@ -11,6 +12,14 @@ module.exports = {
             var checDepNameExisted = await Department.count({ where: { name: department.name } });
             if(checDepNameExisted){
                 return {code : 400, status :"Name is existed!"};
+            }
+            var checDepEmailExistedTeam = await Team.count({ where: { email: department.email } });
+            if(checDepEmailExistedTeam){
+                return {code : 400, status :"Email is duplicate with team!"};
+            }
+            var checDepEmailExistedEmp = await Employee.count({ where: { primary_email: department.email } });
+            if(checDepEmailExistedEmp){
+                return {code : 400, status :"Email is duplicate with employee!"};
             }
             return await Department.create({
                 name: department.name,
@@ -66,7 +75,9 @@ module.exports = {
     findAllDepartment: async () => {
         try {
             return await Department.findAll({
-                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path','email','status_id'],            }).then(async res => {
+                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path','email','status_id'],
+                where : {status_id : contants.DEPARTMENT_STATUS_ACTIVE}
+            }).then(async res => {
                 return res;
             })
         } catch (err) {
