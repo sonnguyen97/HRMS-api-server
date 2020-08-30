@@ -7,20 +7,20 @@ module.exports = {
     createTeam: async (team) => {
         try {
             var checkTeamEmailExisted = await Team.count({ where: { email: team.email } });
-            if(checkTeamEmailExisted){
-                return {code : 400, status :"Email is existed!"};
+            if (checkTeamEmailExisted) {
+                return { code: 400, status: "Email is existed!" };
             }
             var checkTeamNameExisted = await Team.count({ where: { name: team.name } });
-            if(checkTeamNameExisted){
-                return {code : 400, status :"Name is existed!"};
+            if (checkTeamNameExisted) {
+                return { code: 400, status: "Name is existed!" };
             }
             var checkTeamEmailExistedDep = await Department.count({ where: { email: team.email } });
-            if(checkTeamEmailExistedDep){
-                return {code : 400, status :"Email is duplicate with department!"};
+            if (checkTeamEmailExistedDep) {
+                return { code: 400, status: "Email is duplicate with department!" };
             }
             var checkTeamEmailExistedEmp = await Employee.count({ where: { primary_email: team.email } });
-            if(checkTeamEmailExistedEmp){
-                return {code : 400, status :"Email is duplicate with employee!"};
+            if (checkTeamEmailExistedEmp) {
+                return { code: 400, status: "Email is duplicate with employee!" };
             }
             return await Team.create({
                 name: team.name,
@@ -85,14 +85,14 @@ module.exports = {
                 members: []
             }
             return await Team.findOne({
-                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'email','status_id'],                
+                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'email', 'status_id'],
                 include: [
                     {
                         attributes: ['employee_id', 'modified_date'],
                         model: Team_Employee,
                         include: [
                             {
-                                attributes: ['id','first_name','last_name','primary_email','position_id'],
+                                attributes: ['id', 'first_name', 'last_name', 'primary_email', 'position_id'],
                                 model: Employee,
                                 include: [
                                     {
@@ -100,35 +100,36 @@ module.exports = {
                                         attributes: ['name'],
                                     }
                                 ],
+                                where: { status_id: 1 }
                             }
                         ],
                         as: 'members'
                     }],
                 order: [['email', "ASC"]],
                 where: { id: id }
-                
+
             }).then(async res => {
                 response.id = res.id;
                 response.groupName = res.name;
                 response.email = res.email;
                 response.description = res.description;
                 response.status_id = res.status_id;
-                for(var i = 0 ;i < res.members.length; i++){
+                for (var i = 0; i < res.members.length; i++) {
                     let item = {
-                        id : Number,
+                        id: Number,
                         primary_email: String,
                         emp_name: String,
-                        position_id : Number,
+                        position_id: Number,
                         position_name: String
                     };
                     var el = res.members[i];
                     item.id = el.employee.id;
                     item.primary_email = el.employee.primary_email;
-                    item.emp_name = el.employee.first_name +' '+ el.employee.last_name;
+                    item.emp_name = el.employee.first_name + ' ' + el.employee.last_name;
                     item.position_id = el.employee.position_id;
                     item.position_name = el.employee.position.name;
                     response.members.push(item);
-                }   
+                }
                 return response;
             })
 
@@ -137,17 +138,17 @@ module.exports = {
         }
     },
 
-    removeEmpOfTeam : async(delEmp)=>{
+    removeEmpOfTeam: async (delEmp) => {
         try {
             return await Team_Employee.destroy({
-                where: { 
-                    employee_id : delEmp.empId,
-                    team_id : delEmp.teamId
+                where: {
+                    employee_id: delEmp.empId,
+                    team_id: delEmp.teamId
                 }
             }).then(async res => {
                 return res;
             })
-            
+
         } catch (error) {
             console.log(err);
         }
