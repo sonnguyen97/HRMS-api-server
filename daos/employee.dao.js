@@ -121,6 +121,7 @@ module.exports = {
                         phone: employee.phone,
                         address: employee.address,
                         department_id : employee.departmentId,
+                        position_id : employee.positionId,
                         status_id : employee.status_id
                     },
                     { where: { id: employee.id } },
