@@ -84,6 +84,19 @@ module.exports = {
             console.log(err);
         }
     },
+    findAllDepartmentActivate: async () => {
+        try {
+            return await Department.findAll({
+                attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path', 'email', 'status_id'],
+                where: { status_id: 1 },
+                order: [['status_id', "ASC"]],
+            }).then(async res => {
+                return res;
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    },
     findByPk: async (id) => {
         try {
             return await Department.findAll({
