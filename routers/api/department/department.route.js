@@ -13,6 +13,16 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/getAllActivateDepartment", async (req, res) => {
+    try {
+        const departments = await department_dao.findAllDepartmentActivate();
+        res.json(departments);
+    } catch (err) {
+        console.log(err.message);
+        res.send("Server error");
+    }
+});
+
 router.get("/:id", async (req, res) => {
     const id = req.params.id;
     try {
@@ -46,7 +56,7 @@ router.post("/", async (req, res) => {
                 message: result.status
             }
             res.json(response);
-        } else  {
+        } else {
             const response = {
                 status: 200,
                 message: "Create Department success!"
