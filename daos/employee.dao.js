@@ -20,7 +20,8 @@ module.exports = {
                     {
                         model: Position,
                         attributes: ['name']
-                    }]
+                    }],
+                    order: [['status_id', "ASC"]],
                 }
             )
         } catch (err) {

@@ -76,7 +76,7 @@ module.exports = {
         try {
             return await Department.findAll({
                 attributes: ['id', 'name', 'description', 'created_date', 'modified_date', 'orgunits_path','email','status_id'],
-                where : {status_id : contants.DEPARTMENT_STATUS_ACTIVE}
+                order: [['status_id', "ASC"]],
             }).then(async res => {
                 return res;
             })
