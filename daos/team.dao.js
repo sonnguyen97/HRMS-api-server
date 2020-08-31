@@ -90,13 +90,16 @@ module.exports = {
                     {
                         attributes: ['employee_id', 'modified_date'],
                         model: Team_Employee,
+                        as: 'members',
                         include: [
                             {
                                 attributes: ['id', 'first_name', 'last_name', 'primary_email', 'position_id'],
                                 model: Employee,
+                                as: 'employee',
                                 include: [
                                     {
                                         model: Position,
+                                        as: 'position',
                                         attributes: ['name'],
                                     }
                                 ],
