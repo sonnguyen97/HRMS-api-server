@@ -4,7 +4,7 @@ const Employee = require("./Employee");
 const Team = require("./Team");
 
 const Team_Employee = db.define(
-    "team_employee",
+    "gmhrs_team_employee_view",
     {
         employee_id: {
             type: Sequelize.INTEGER,

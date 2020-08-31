@@ -3,7 +3,7 @@ const db = require("../config/db-connection");
 const TeamOperatorStatus = require("./TeamOperatorStatus");
 
 const Team = db.define(
-    "team",
+    "gmhrs_team_view",
     {
         id: {
             type: Sequelize.INTEGER,
