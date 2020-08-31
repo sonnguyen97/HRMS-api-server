@@ -3,7 +3,7 @@ const db = require("../config/db-connection");
 const Employee = require("./Employee");
 
 const Vacation = db.define(
-    "gmhrs_vacation_date_view",
+    "vacation_date",
     {
         id: {
             type: Sequelize.INTEGER,

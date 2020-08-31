@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../config/db-connection");
 
 const Position = db.define(
-    "gmhrs_position_view",
+    "position",
     {
         id: {
             type: Sequelize.INTEGER,

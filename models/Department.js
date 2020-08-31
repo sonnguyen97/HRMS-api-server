@@ -3,7 +3,7 @@ const db = require("../config/db-connection");
 const DepartmentOperatorStatus = require("./DepartmentOperatorStatus");
 
 const Department = db.define(
-    "gmhrs_department_view",
+    "department",
     {
         id: {
             type: Sequelize.STRING,

@@ -5,7 +5,7 @@ const Position = require("./Position");
 const Department = require("./Department");
 
 const Employee = db.define(
-    "gmhrs_employee_view",
+    "employee",
     {
         id: {
             type: Sequelize.STRING,
