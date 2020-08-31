@@ -78,10 +78,12 @@ Position.hasMany(Employee, {
 });
 //Department
 Employee.belongsTo(Department, {
+    as:'department',
     foreignKey: "department_id",
     sourceKey: "id"
 });
 Department.hasMany(Employee, {
+    as:'department',
     foreignKey: "department_id",
     sourceKey: "id"
 });

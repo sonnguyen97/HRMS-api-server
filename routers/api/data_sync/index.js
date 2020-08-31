@@ -30,7 +30,8 @@ router.get('/', async (req, res) => {
             include: [
                 {
                     model: Department,
-                    attributes: ['id', 'name'],
+                    as: 'department',
+                    attributes: ['id', 'name', 'email'],
                 },
                 {
                     model: Team_Employee,
@@ -79,6 +80,7 @@ router.get('/', async (req, res) => {
                         {
                             attributes: ['primary_email', ['id', 'employee_id']],
                             model: Employee,
+                            as: 'employee',
                             order: [['id', 'ASC']],
                             // where: { status_id: 1 }
 

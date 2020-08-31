@@ -25,7 +25,7 @@ const Team_Employee = db.define(
 );
 
 Team_Employee.belongsTo(Employee, {
-
+    as: 'employee',
     foreignKey: "employee_id",
     sourceKey: "id"
 });
