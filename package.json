@@ -30,6 +30,7 @@
     "mysql2": "^2.1.0",
     "randomstring": "^1.1.5",
     "sequelize": "^5.21.9",
-    "uuidv1": "^1.6.14"
+    "uuidv1": "^1.6.14",
+    "moment": "^2.27.0"
   }
 }

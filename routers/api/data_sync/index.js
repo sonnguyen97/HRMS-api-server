@@ -1,8 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const employee_structure = require("./../../../structure/employee");
-const team_structure = require("./../../../structure/team");
-const department_structure = require("./../../../structure/department");
 //model
 const Employee = require("./../../../models/Employee");
 const Team = require("./../../../models/Team");
@@ -12,6 +9,8 @@ const Position = require("../../../models/Position");
 const Vacation = require("../../../models/Vacation");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+const sequelize = require("sequelize");
+// const moment = require('moment');
 
 
 router.get('/', async (req, res) => {
@@ -48,14 +47,18 @@ router.get('/', async (req, res) => {
             where: { status_id: 1 }
         });
 
-        var today = new Date();
-        var vacation = await Vacation.findAll({
-            where: {
-                [Op.or]: [{ start_date: { [Op.eq]: today.toISOString().substring(0, 10) } }, { start_date: { [Op.gt]: today.toISOString().substring(0, 10) } }]
-            },
-            order: [['start_date', 'ASC']]
-        });
-        console.log(today.toISOString().substring(0, 10));
+        // var today = new Date();
+        // var vacation = await Vacation.findAll({
+        //     where: {
+        //         [Op.or]: [{ start_date: { [Op.eq]: moment().utc(today).local().toISOString().substring(0, 10) } }, { start_date: { [Op.gt]: moment().utc(today).local().toISOString().substring(0, 10) } }],
+               
+        //     },
+        //     order: [['start_date', 'ASC']]
+        // });
+
+        const sql = "SELECT id, created_date, employee_id, start_date, end_date FROM vacation_date AS vacation_date WHERE (current_date() between date(vacation_date.start_date) and date(vacation_date.end_date)) OR date(vacation_date.start_date) >= current_date() ORDER BY vacation_date.start_date DESC";
+        const vacation = await Vacation.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT });
+        // console.log(today.toISOString().substring(0, 10));
         if (vacation.length > 0) {
             for (let i = 0; i < employeeResponse.length; i++) {
                 for (let j = 0; j < vacation.length; j++) {
