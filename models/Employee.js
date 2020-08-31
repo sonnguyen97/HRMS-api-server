@@ -69,10 +69,12 @@ EmployeeOperatorStatus.hasMany(Employee, {
 });
 //Position
 Employee.belongsTo(Position, {
+    as:'position',
     foreignKey: "position_id",
     sourceKey: "id"
 });
 Position.hasMany(Employee, {
+    as:'position',
     foreignKey: "position_id",
     sourceKey: "id"
 });

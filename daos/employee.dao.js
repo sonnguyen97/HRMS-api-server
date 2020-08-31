@@ -15,10 +15,12 @@ module.exports = {
                     attributes: ['id', 'first_name', 'last_name', 'primary_email', 'personal_email', 'phone', 'created_date', 'modified_date', 'status_id'],
                     include: [{
                         model: Department,
+                        as: 'department',
                         attributes: ['name']
                     },
                     {
                         model: Position,
+                        as: 'position',
                         attributes: ['name']
                     }],
                     order: [['status_id', "ASC"]],
