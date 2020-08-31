@@ -68,7 +68,7 @@ module.exports = {
                     attributes: ['id', 'primary_email', 'personal_email', 'phone', 'address', 'first_name', 'last_name', 'created_date', 'modified_date', 'status_id'],
                     include: [{
                         model: Position,
-                        attributes: ['name']
+                        attributes: ['id','name']
                     },
                     {
                         model: Vacation_Employee,
