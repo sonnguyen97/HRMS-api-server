@@ -33,6 +33,11 @@ router.get('/', async (req, res) => {
                     attributes: ['id', 'name', 'email'],
                 },
                 {
+                    model: Position,
+                    as:'position',
+                    attributes: ['id', 'name'],
+                },
+                {
                     model: Team_Employee,
                     as: 'teams',
                     attributes: ['team_id'],
@@ -46,15 +51,6 @@ router.get('/', async (req, res) => {
             ],
             where: { status_id: 1 }
         });
-
-        // var today = new Date();
-        // var vacation = await Vacation.findAll({
-        //     where: {
-        //         [Op.or]: [{ start_date: { [Op.eq]: moment().utc(today).local().toISOString().substring(0, 10) } }, { start_date: { [Op.gt]: moment().utc(today).local().toISOString().substring(0, 10) } }],
-               
-        //     },
-        //     order: [['start_date', 'ASC']]
-        // });
 
         const sql = "SELECT id, created_date, employee_id, start_date, end_date FROM vacation_date AS vacation_date WHERE (current_date() between date(vacation_date.start_date) and date(vacation_date.end_date)) OR date(vacation_date.start_date) >= current_date() ORDER BY vacation_date.start_date DESC";
         const vacation = await Vacation.sequelize.query(sql, { type: sequelize.QueryTypes.SELECT });
