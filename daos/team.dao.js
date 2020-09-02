@@ -155,6 +155,23 @@ module.exports = {
         } catch (error) {
             console.log(err);
         }
-    }
+    },
+
+    findAllTeamActivated: async () => {
+        try {
+            return await Team.findAll({
+                attributes: ['id', 'name', 'description', 'created_date','status_id', 'modified_date', 'email'],
+                order: [['status_id', "ASC"]],
+                where: {
+                    status_id: 1
+                }
+            }
+            ).then(async res => {
+                return res;
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    },
 };
 

@@ -13,6 +13,16 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/team-activated", async (req, res) => {
+    try {
+        const teams = await team_dao.findAllTeamActivated();
+        res.json(teams);
+    } catch (err) {
+        console.log(err.message);
+        res.send("Server error");
+    }
+});
+
 router.get("/:id", async (req, res) => {
     const id = req.params.id;
     try {
