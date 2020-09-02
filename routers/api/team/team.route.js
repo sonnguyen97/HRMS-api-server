@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
                 message: result.status
             }
             res.json(response);
-        } else  {
+        } else {
             const response = {
                 status: 200,
                 message: "Team is created!"
@@ -100,22 +100,23 @@ router.put("/delete", async (req, res) => {
 router.put("/empdelete", async (req, res) => {
     const delEmp = req.body;
     try {
-        if(delEmp != undefined && delEmp.teamId != undefined && delEmp.empId != undefined){
+        if (delEmp != undefined && delEmp.teamId != undefined && delEmp.empId != undefined) {
             var result = await team_dao.removeEmpOfTeam(delEmp);
-            if (result !== undefined) {
-                const response = {
-                    status: 200,
-                    message: "Delete Team success!"
-                }
-                res.json(response);
-            } else if (result === undefined) {
-                const response = {
-                    status: 500,
-                    message: "Delete Team fail!"
-                }
-                res.json(response);
-            }
-        }else{
+            res.json(result);
+            // if (result !== undefined) {
+            //     const response = {
+            //         status: 200,
+            //         message: "Delete Team success!"
+            //     }
+            //     res.json(response);
+            // } else if (result === undefined) {
+            //     const response = {
+            //         status: 500,
+            //         message: "Delete Team fail!"
+            //     }
+            //     res.json(response);
+            // }
+        } else {
             const response = {
                 status: 400,
                 message: "Wrong input!"

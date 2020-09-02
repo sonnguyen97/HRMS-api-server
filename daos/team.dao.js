@@ -64,7 +64,7 @@ module.exports = {
     findAllTeam: async () => {
         try {
             return await Team.findAll({
-                attributes: ['id', 'name', 'description', 'created_date','status_id', 'modified_date', 'email'],
+                attributes: ['id', 'name', 'description', 'created_date', 'status_id', 'modified_date', 'email'],
                 order: [['status_id', "ASC"]]
             }).then(async res => {
                 return res;
@@ -143,13 +143,26 @@ module.exports = {
 
     removeEmpOfTeam: async (delEmp) => {
         try {
+            let listTeam = await Team_Employee.findAll({
+                attributes: ['team_id'],
+                where: { team_id: delEmp.teamId }
+            });
+            if (listTeam.length === 1) {
+                return {
+                    status: false,
+                    message: 'Team must contain one employee!'
+                }
+            }
             return await Team_Employee.destroy({
                 where: {
                     employee_id: delEmp.empId,
                     team_id: delEmp.teamId
                 }
             }).then(async res => {
-                return res;
+                return {
+                    status: true,
+                    message: 'Remove employee from team successfully!'
+                };
             })
 
         } catch (error) {
