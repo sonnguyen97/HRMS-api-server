@@ -14,5 +14,6 @@ router.use("/vacation", require("./api/vacation/vacation.route"));
 router.use("/positions", require("./api/position/position.route"));
 // api data for synchronize
 router.use("/data-hrms", require("./api/data_sync/index"));
+router.use("/auth", require("./api/authentication/auth.route"));
 
 module.exports = router;

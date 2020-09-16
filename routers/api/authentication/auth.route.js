@@ -6,7 +6,9 @@ const config = require("config");
 // const bcrypt = require('bcryptjs');
 const { check, validationResult } = require("express-validator");
 const Account = require("../../../models/Account");
-var CryptoJS = require("crypto-js");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
+const crypto = require('crypto');
 
 /* ----- 
   @route  GET api/auth
@@ -34,41 +36,28 @@ router.get("/", auth, async (req, res) => {
 -----*/
 router.post(
   "/login",
-  [
-    // check("email", "Please include a valid email").isEmail(),
-    check(
-      "password",
-      "Please enter a password with 6 or more character"
-    ).exists()
-  ],
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array()
-      });
-    }
+    const { email = '', username = '', password } = req.body;
+    var passwordEncrypt = crypto.createHash('sha256').update(password).digest('base64');
+    console.log(passwordEncrypt);
 
-    const { email, password } = req.body;
-    var passwordEncrypt = CryptoJS.SHA256(password);
     try {
       console.log(req.body);
       let account = await Account.findOne({
         where: {
           email: email,
-          password: passwordEncrypt.toString()
+          password: passwordEncrypt
         }
       });
 
       if (!account) {
         return res
           .status(400)
-          .json({ errors: [{ message: "Invalid email or password" }] });
+          .json({
+            isAuthenticated: false,
+            message: "Username or password is incorrect"
+          });
       }
-      // const isMatch = await bcrypt.compare(password, user.password);
-      // if (!isMatch) {
-      //     return res.status(400).json({ errors: [{ message: 'Invalid email or password' }] })
-      // }
       const payload = {
         account: {
           id: account.id
@@ -77,13 +66,23 @@ router.post(
       jwt.sign(
         payload,
         config.get("jwtSecret"),
-        { expiresIn: 3600000000000 },
+        { expiresIn: 36000000 },
         (err, token) => {
-          if (err) throw err;
-          res.json({
-            isAuthenticated: true,
-            token
-          });
+          if (err) {
+            throw err;
+          } else if (account.dataValues.two_fa_status === 1) {
+            res.json({
+              isAuthenticated: false,
+              message: "Two FA Authentication",
+              token
+            });
+          } else {
+            res.json({
+              isAuthenticated: true,
+              message: "Login successful!",
+              token
+            });
+          }
         }
       );
     } catch (err) {

@@ -10,12 +10,14 @@ const Vacation = require("../../../models/Vacation");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const sequelize = require("sequelize");
+const auth = require("../../../middlleware/auth.middleware");
 // const moment = require('moment');
 
 
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
     try {
         var structure = {
+            isAuthenticated: true,
             employees: [],
             teams: [],
             departments: [],
@@ -36,15 +38,15 @@ router.get('/', async (req, res) => {
                     model: Position,
                     as:'position',
                     attributes: ['id', 'name'],
-                },
-                {
-                    model: Team_Employee,
-                    as: 'teams',
-                    attributes: ['team_id'],
-                    order: [
-                        ['team_id', 'ASC']
-                    ]
                 }
+                // {
+                //     model: Team_Employee,
+                //     as: 'teams',
+                //     attributes: ['team_id'],
+                //     order: [
+                //         ['team_id', 'ASC']
+                //     ]
+                // }
             ],
             order: [
                 ['primary_email', 'ASC']
