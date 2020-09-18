@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const team_dao = require("../../../daos/team.dao");
+const team_employee_dao = require("../../../daos/team_employee.dao");
 const auth = require("../../../middlleware/auth.middleware");
 
 router.get("/", async (req, res) => {
@@ -138,5 +139,17 @@ router.put("/empdelete", async (req, res) => {
         res.send("Server error");
     }
 });
+router.post("/checkdup", async (req, res) => {
+    const employee = req.body;
+    var listAccount = employee.listEmployee;
+    var teamId = employee.teamId;
+    try {
+        var result = await team_employee_dao.checkTeamEmployee(listAccount,teamId);
+        res.json(result);
+    } catch (err) {
+        console.log(err);
+        res.send("server error");
+    }
+})  
 
 module.exports = router;
