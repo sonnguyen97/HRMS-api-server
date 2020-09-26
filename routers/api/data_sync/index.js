@@ -36,7 +36,7 @@ router.get('/', auth, async (req, res) => {
                 },
                 {
                     model: Position,
-                    as:'position',
+                    as: 'position',
                     attributes: ['id', 'name'],
                 }
                 // {
@@ -83,7 +83,7 @@ router.get('/', auth, async (req, res) => {
                             model: Employee,
                             as: 'employee',
                             order: [['id', 'ASC']],
-                            // where: { status_id: 1 }
+                            where: { status_id: 1 }
 
                         }
                     ]
