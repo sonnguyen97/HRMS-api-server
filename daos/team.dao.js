@@ -145,6 +145,14 @@ module.exports = {
         try {
             let listTeam = await Team_Employee.findAll({
                 attributes: ['team_id'],
+                include: [
+                    {
+                        model: Employee,
+                        as: 'employee',
+                        attributes: ['primary_email'],
+                        where: { status_id: 1 }
+                    }
+                ],
                 where: { team_id: delEmp.teamId }
             });
             if (listTeam.length === 1) {
@@ -166,14 +174,14 @@ module.exports = {
             })
 
         } catch (error) {
-            console.log(err);
+            console.log(error);
         }
     },
 
     findAllTeamActivated: async () => {
         try {
             return await Team.findAll({
-                attributes: ['id', 'name', 'description', 'created_date','status_id', 'modified_date', 'email'],
+                attributes: ['id', 'name', 'description', 'created_date', 'status_id', 'modified_date', 'email'],
                 order: [['status_id', "ASC"]],
                 where: {
                     status_id: 1
