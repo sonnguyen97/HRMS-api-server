@@ -61,8 +61,8 @@ router.get('/', auth, async (req, res) => {
             for (let i = 0; i < employeeResponse.length; i++) {
                 for (let j = 0; j < vacation.length; j++) {
                     if (employeeResponse[i].id === vacation[j].employee_id) {
-                        employeeResponse[i].vacation_start_date = vacation[j].start_date;
-                        employeeResponse[i].vacation_end_date = vacation[j].end_date;
+                        employeeResponse[i].vacation_start_date = vacation[j].start_date ? vacation[j].start_date : null;
+                        employeeResponse[i].vacation_end_date = vacation[j].end_date ? vacation[j].end_date : null;
                     }
                 }
             }
