@@ -75,7 +75,20 @@ router.put("/", async (req, res) => {
     console.log(department);
     try {
         var result = await department_dao.updateDepartment(department, department_id);
-        res.json(result);
+        if (result.code == 400) {
+            const response = {
+                status: result.code,
+                message: result.status
+            }
+            console.log(response)
+            res.json(response);
+        } else {
+            const response = {
+                status: 200,
+                message: "Create Department success!"
+            }
+            res.json(response);
+        }
     } catch (err) {
         console.log(err.message);
         res.send("Server error");
