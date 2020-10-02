@@ -72,7 +72,19 @@ router.put("/", async(req,res)=> {
     console.log(employee);
     try {
         await employe_dao.updateEmoloyee(employee);
-        res.status(200).json("update success");
+        if (result.code == 400) {
+            const response = {
+                status: result.code,
+                message: result.status
+            }
+            res.json(response);
+        } else {
+            const response = {
+                status: 200,
+                message: "Employee is updated!"
+            }
+            res.json(response);
+        }
     } catch (err) {
         console.log(err);
         res.send("server error");

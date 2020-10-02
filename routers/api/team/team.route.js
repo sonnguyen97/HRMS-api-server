@@ -65,16 +65,16 @@ router.put("/", async (req, res) => {
     console.log(team);
     try {
         var result = await team_dao.updateTeam(team, team_id);
-        if (result) {
+        if (result.code == 400) {
             const response = {
-                status: "success",
-                message: "Update Team success!"
+                status: result.code,
+                message: result.status
             }
             res.json(response);
         } else {
             const response = {
-                status: "fail",
-                message: "Update Team fail!"
+                status: 200,
+                message: "Team is updated!"
             }
             res.json(response);
         }

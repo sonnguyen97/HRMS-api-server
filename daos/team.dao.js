@@ -38,6 +38,14 @@ module.exports = {
 
     updateTeam: async (team, team_id) => {
         try {
+            var checkTeamEmailExistedDep = await Department.count({ where: { email: team.email } });
+            if (checkTeamEmailExistedDep) {
+                return { code: 400, status: "Email is duplicate with department!" };
+            }
+            var checkTeamEmailExistedEmp = await Employee.count({ where: { primary_email: team.email } });
+            if (checkTeamEmailExistedEmp) {
+                return { code: 400, status: "Email is duplicate with employee!" };
+            }
             return await Team.update(team, {
                 where: { id: team_id }
             }).then(async res => {

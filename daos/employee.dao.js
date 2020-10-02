@@ -114,6 +114,14 @@ module.exports = {
     },
     updateEmoloyee: async (employee) => {
         try {
+            var checkEmpExistedTeam = await Team.count({ where: { email: employee.primary_email } });
+            if (checkEmpExistedTeam) {
+                return { code: 400, status: "Email is duplicate with team!" };
+            }
+            var checkEmpExistedDep = await Department.count({ where: { email: employee.primary_email } });
+            if (checkEmpExistedDep) {
+                return { code: 400, status: "Email is duplicate with department!" };
+            }
             var checkEmpExisted = await Employee.count({ where: { id: employee.id } });
             if (checkEmpExisted != 0) {
                 return await Employee.update(
@@ -131,7 +139,9 @@ module.exports = {
                     { where: { id: employee.id } },
 
                 )
-            } else { return false };
+            } else { 
+                return { code: 400, status: "Employee is not existed!" };
+            }
         } catch (err) {
             console.log(err);
         }

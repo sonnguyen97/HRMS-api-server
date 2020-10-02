@@ -36,6 +36,14 @@ module.exports = {
     },
     updateDepartment: async (department, department_id) => {
         try {
+            var checDepEmailExistedTeam = await Team.count({ where: { email: department.email } });
+            if (checDepEmailExistedTeam) {
+                return { code: 400, status: "Email is duplicate with team!" };
+            }
+            var checDepEmailExistedEmp = await Employee.count({ where: { primary_email: department.email } });
+            if (checDepEmailExistedEmp) {
+                return { code: 400, status: "Email is duplicate with employee!" };
+            }
             if (department.status_id === 2) {
                 var employee = await Employee.findAll({
                     attributes: ['id'],
@@ -48,7 +56,7 @@ module.exports = {
                         return { code: 200, status: "Department has been updated!" };
                     })
                 } else {
-                    return { code: 1, status: "Department has employee!" }
+                    return { code: 400, status: "Department has employee!" }
                 }
             } else {
                 return await Department.update(department, {
