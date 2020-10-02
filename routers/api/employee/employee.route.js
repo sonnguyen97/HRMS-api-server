@@ -27,14 +27,14 @@ router.post("/addToTeam", async (req, res) => {
     const listEmployee = req.body;
     try {
         const emp = await employe_dao.addEmployeeToTeam(listEmployee);
-        
-        if(emp) {
-            res.json({ 
+
+        if (emp) {
+            res.json({
                 status: "success",
                 message: "adding employee to team success!"
             });
-        } else { 
-            res.json({ 
+        } else {
+            res.json({
                 status: "fail",
                 message: "adding employee to team fail!"
             });
@@ -67,11 +67,11 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
-router.put("/", async(req,res)=> {
+router.put("/", async (req, res) => {
     var employee = req.body;
     console.log(employee);
     try {
-        await employe_dao.updateEmoloyee(employee);
+        let result = await employe_dao.updateEmoloyee(employee);
         if (result.code == 400) {
             const response = {
                 status: result.code,
